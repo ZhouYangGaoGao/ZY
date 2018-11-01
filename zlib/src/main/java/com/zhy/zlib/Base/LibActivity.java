@@ -1,13 +1,17 @@
 package com.zhy.zlib.Base;
 
+import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhy.zlib.R;
 import com.zhy.zlib.listener.CommonListener;
 import com.zhy.zlib.utils.LogUtils;
 
 public abstract class LibActivity extends AppCompatActivity implements CommonListener {
+    Dialog loading;
 
     @Override
     public void onSuccess(String Tag, String value) {
@@ -43,5 +47,22 @@ public abstract class LibActivity extends AppCompatActivity implements CommonLis
     @Override
     public View getView(int id) {
         return View.inflate(this, id, null);
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void disLoading() {
+        if (loading != null) {
+            loading.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disLoading();
     }
 }

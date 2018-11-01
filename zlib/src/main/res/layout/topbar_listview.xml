@@ -4,17 +4,19 @@
     android:id="@+id/topbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:CT="关注|热点|推荐">
+    app:CT=""
+    app:LT=""
+    app:RT=""
+    app:L2src="@color/transparent"
+    app:L1src="@color/transparent"
+    app:R1src="@color/transparent"
+    app:R2src="@color/transparent">
 
-    <TextView
-        android:id="@+id/text"
+    <include
+        layout="@layout/refresh_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="46dp"
-        android:background="@color/colorWhite"
-        android:gravity="center"
-        android:text="我不是药神" />
-
+        android:layout_marginTop="44dp" />
 
 </com.zhy.zlib.view.TopBar>
 

@@ -31,7 +31,6 @@ public class OneFragment extends BaseFragment {
                         text.setBackgroundColor(0xff0000ff);
                         break;
                 }
-
                 return false;
             }
         });

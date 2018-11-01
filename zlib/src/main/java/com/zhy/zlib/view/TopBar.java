@@ -77,16 +77,16 @@ public class TopBar extends RelativeLayout {
 
         ctvlp = new LinearLayout.LayoutParams(0, dip2px(48), 1);
         tvlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dip2px(48));
-        tvlp.setMargins(dip2px(6), 0, dip2px(6), 0);
+        tvlp.setMargins(dip2px(4), 0, dip2px(4), 0);
         imglp = new LinearLayout.LayoutParams((int) iw, (int) iw);
-        imglp.setMargins(dip2px(9), 0, dip2px(9), 0);
+        imglp.setMargins(dip2px(6), 0, dip2px(6), 0);
         left = new LinearLayout(context);
         leftClick = new LinearLayout(context);
-        left.setPadding(dip2px(6), 0, 0, 0);
+        left.setPadding(dip2px(4), 0, 0, 0);
         left.setGravity(Gravity.START + Gravity.CENTER_VERTICAL);
         right = new LinearLayout(context);
         right.setGravity(Gravity.END + Gravity.CENTER_VERTICAL);
-        right.setPadding(0, 0, dip2px(6), 0);
+        right.setPadding(0, 0, dip2px(4), 0);
         center = new LinearLayout(context);
         center.setGravity(Gravity.CENTER);
 

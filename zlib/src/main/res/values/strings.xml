@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">ZLib</string>
+
+    <array name="load_name" >
+        <item >BallPulseIndicator</item>
+        <item >BallGridPulseIndicator</item>
+        <item >BallClipRotateIndicator</item>
+        <item >BallClipRotatePulseIndicator</item>
+
+        <item >SquareSpinIndicator</item>
+        <item >BallClipRotateMultipleIndicator</item>
+        <item >BallPulseRiseIndicator</item>
+        <item >BallRotateIndicator</item>
+
+        <item >CubeTransitionIndicator</item>
+        <item >BallZigZagIndicator</item>
+        <item >BallZigZagDeflectIndicator</item>
+        <item >BallTrianglePathIndicator</item>
+
+        <item >BallScaleIndicator</item>
+        <item >LineScaleIndicator</item>
+        <item >LineScalePartyIndicator</item>
+        <item >BallScaleMultipleIndicator</item>
+
+        <item >BallPulseSyncIndicator</item>
+        <item >BallBeatIndicator</item>
+        <item >LineScalePulseOutIndicator</item>
+        <item >BallScaleRippleIndicator</item>
+
+        <item >LineScalePulseOutRapidIndicator</item>
+        <item >BallScaleRippleMultipleIndicator</item>
+        <item >BallSpinFadeLoaderIndicator</item>
+        <item >LineSpinFadeLoaderIndicator</item>
+
+        <item >TriangleSkewSpinIndicator</item>
+        <item >PacmanIndicator</item>
+        <item >BallGridBeatIndicator</item>
+        <item >SemiCircleSpinIndicator</item>
+    </array>
 </resources>

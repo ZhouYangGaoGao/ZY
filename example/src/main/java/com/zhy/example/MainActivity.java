@@ -1,6 +1,5 @@
 package com.zhy.example;
 
-
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -17,9 +16,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        selectbar.withViewPager(viewpager, getSupportFragmentManager(), new OneFragment(), new TwoFragment(), new ThreeFragment())
-                .setImgResouce(R.drawable.shape_dot_d8d8d8, R.drawable.shape_dot_d8d8d8, R.drawable.shape_dot_d8d8d8,
-                        R.drawable.shape_dot_blue, R.drawable.shape_dot_blue, R.drawable.shape_dot_blue).doSelecte(0);
+        selectbar.withViewPager(viewpager, getSupportFragmentManager(),
+                new OneFragment(), new ListViewFragment(), new ThreeFragment())
+                .setImgResouce(R.drawable.shape_dot_d8d8d8, R.drawable.shape_dot_d8d8d8,
+                        R.drawable.shape_dot_d8d8d8, R.drawable.shape_dot_blue,
+                        R.drawable.shape_dot_blue, R.drawable.shape_dot_blue).doSelecte(0);
     }
 
     @Override

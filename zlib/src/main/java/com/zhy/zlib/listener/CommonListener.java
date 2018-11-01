@@ -26,4 +26,7 @@ CommonListener {
     void log(String Tag, String value);
 
     View getView(int id);
+
+    void showLoading();
+    void disLoading();
 }

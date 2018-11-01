@@ -167,8 +167,8 @@ public class SelectBar extends LinearLayout {
 
 
             if (isBottomTab) {
-                linelp = new LayoutParams(dip2px(22), dip2px(22));
-                linelp.setMargins(0, 5, 0, 0);
+                linelp = new LayoutParams(dip2px(20), dip2px(20));
+                linelp.setMargins(0, dip2px(5), 0, 0);
                 itemlp = new LayoutParams(0, sp2px(44), 1);
                 llp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 textlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
@@ -176,7 +176,6 @@ public class SelectBar extends LinearLayout {
                 ll.addView(img, linelp);
                 ll.addView(tv, textlp);
             } else {
-
 
                 if (line != null) {
                     img.setBackground(line);

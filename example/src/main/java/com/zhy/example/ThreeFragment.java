@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wang.avi.AVLoadingIndicatorView;
+import com.zhy.zlib.Base.LibConfig;
 import com.zhy.zlib.adapter.CommonAdapter;
 import com.zhy.zlib.listener.AddView;
 import com.zhy.zlib.utils.SelecteUtil;
@@ -33,16 +34,12 @@ public class ThreeFragment extends BaseFragment {
     @BindView(R.id.gv)
     GridView gv;
     SelecteUtil slu;
-    List<String> gifs=new ArrayList<>();
+    List<String> gifs = new ArrayList<>();
 
     @Override
     public void initView() {
         List<String> datas = new ArrayList();
-        datas.add("生");
-        datas.add("日");
-        datas.add("快");
-        datas.add("乐");
-        datas.add("!");
+        for (int i = 0; i < LibConfig.loading_name.length/2; i++) datas.add(LibConfig.loading_name[i]);
         slu = new SelecteUtil(myViewPager, datas, new AddView() {
             @Override
             public View initView(int index, Object data) {
@@ -54,48 +51,12 @@ public class ThreeFragment extends BaseFragment {
                 return textView;
             }
         }, dotLayout);
-
-        gifs.add("BallPulseIndicator");
-        gifs.add("BallGridPulseIndicator");
-        gifs.add("BallClipRotateIndicator");
-        gifs.add("BallClipRotatePulseIndicator");
-
-        gifs.add("SquareSpinIndicator");
-        gifs.add("BallClipRotateMultipleIndicator");
-        gifs.add("BallPulseRiseIndicator");
-        gifs.add("BallRotateIndicator");
-
-        gifs.add("CubeTransitionIndicator");
-        gifs.add("BallZigZagIndicator");
-        gifs.add("BallZigZagDeflectIndicator");
-        gifs.add("BallTrianglePathIndicator");
-
-        gifs.add("BallScaleIndicator");
-        gifs.add("LineScaleIndicator");
-        gifs.add("LineScalePartyIndicator");
-        gifs.add("BallScaleMultipleIndicator");
-
-        gifs.add("BallPulseSyncIndicator");
-        gifs.add("BallBeatIndicator");
-        gifs.add("LineScalePulseOutIndicator");
-        gifs.add("LineScalePulseOutRapidIndicator");
-
-        gifs.add("BallScaleRippleIndicator");
-        gifs.add("BallScaleRippleMultipleIndicator");
-        gifs.add("BallSpinFadeLoaderIndicator");
-        gifs.add("LineSpinFadeLoaderIndicator");
-
-        gifs.add("TriangleSkewSpinIndicator");
-        gifs.add("PacmanIndicator");
-        gifs.add("BallGridBeatIndicator");
-        gifs.add("SemiCircleSpinIndicator");
-
-        gv.setAdapter(new CommonAdapter<String>(getActivity(),gifs,R.layout.item_gif) {
+        for (int i = 0; i < LibConfig.loading_name.length; i++) gifs.add(LibConfig.loading_name[i]);
+        gv.setAdapter(new CommonAdapter<String>(getActivity(), gifs, R.layout.item_gif) {
             @Override
             public void convert(ViewHolder h, String i) {
-                AVLoadingIndicatorView av=h.getView(R.id.av);
+                AVLoadingIndicatorView av = h.getView(R.id.av);
                 av.setIndicator(i);
-//                av.show();
             }
         });
 
@@ -107,51 +68,5 @@ public class ThreeFragment extends BaseFragment {
         return getView(R.layout.fragment_three);
     }
 
-    /**
-     * Row 1
-     *
-     * BallPulseIndicator
-     * BallGridPulseIndicator
-     * BallClipRotateIndicator
-     * BallClipRotatePulseIndicator
-     * Row 2
-     *
-     * SquareSpinIndicator
-     * BallClipRotateMultipleIndicator
-     * BallPulseRiseIndicator
-     * BallRotateIndicator
-     * Row 3
-     *
-     * CubeTransitionIndicator
-     * BallZigZagIndicator
-     * BallZigZagDeflectIndicator
-     * BallTrianglePathIndicator
-     * Row 4
-     *
-     * BallScaleIndicator
-     * LineScaleIndicator
-     * LineScalePartyIndicator
-     * BallScaleMultipleIndicator
-     * Row 5
-     *
-     * BallPulseSyncIndicator
-     * BallBeatIndicator
-     * LineScalePulseOutIndicator
-     * LineScalePulseOutRapidIndicator
-     * Row 6
-     *
-     * BallScaleRippleIndicator
-     * BallScaleRippleMultipleIndicator
-     * BallSpinFadeLoaderIndicator
-     * LineSpinFadeLoaderIndicator
-     * Row 7
-     *
-     * TriangleSkewSpinIndicator
-     * PacmanIndicator
-     * BallGridBeatIndicator
-     * SemiCircleSpinIndicator
-     * Row 8
-     *
-     * com.wang.avi.sample.MyCustomIndicator
-     */
+
 }

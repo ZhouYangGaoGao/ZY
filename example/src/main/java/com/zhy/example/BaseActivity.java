@@ -2,12 +2,8 @@ package com.zhy.example;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.zhy.zlib.Base.LibActivity;
-import com.zhy.zlib.listener.CommonListener;
-import com.zhy.zlib.utils.LogUtils;
 
 import butterknife.ButterKnife;
 

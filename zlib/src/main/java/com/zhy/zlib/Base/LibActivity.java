@@ -1,6 +1,7 @@
 package com.zhy.zlib.Base;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import com.zhy.zlib.R;
 import com.zhy.zlib.listener.CommonListener;
+import com.zhy.zlib.manager.AppManager;
 import com.zhy.zlib.utils.LogUtils;
 
 public abstract class LibActivity extends AppCompatActivity implements CommonListener {
@@ -63,6 +65,19 @@ public abstract class LibActivity extends AppCompatActivity implements CommonLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 结束Activity&从堆栈中移除
+        AppManager.getAppManager().finishActivity(this);
         disLoading();
     }
+
+    /**
+     * 对context进行初始化，并将当前的Activity加入到堆栈中，便于管理
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 添加Activity到堆栈
+        AppManager.getAppManager().addActivity(this);
+    }
+
 }

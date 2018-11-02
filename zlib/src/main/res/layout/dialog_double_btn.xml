@@ -3,7 +3,7 @@
     android:id="@+id/dialog_psw"
     android:layout_width="288dp"
     android:layout_height="185dp"
-    android:background="@drawable/shape_bg_ffffff"
+    android:background="@drawable/shape_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -13,7 +13,6 @@
         android:layout_marginTop="25dp"
         android:visibility="gone"
         android:layout_marginBottom="-15dp"
-        android:src="@drawable/camera"
         android:layout_height="33dp" />
 
     <TextView
@@ -21,7 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
-        android:text="@string/t_please_input_psw"
         android:textColor="#ff333333"
         android:textSize="15sp" />
 
@@ -52,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/t_cancel"
+            android:text="取消"
             android:textColor="@color/c_ff666666"
             android:textSize="15sp" />
 
@@ -67,7 +65,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/t_ok"
+            android:text="确定"
             android:textColor="@color/colorBlue"
             android:textSize="15sp" />
     </LinearLayout>

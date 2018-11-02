@@ -1,4 +1,4 @@
-package com.zhy.example;
+package com.zhy.example.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

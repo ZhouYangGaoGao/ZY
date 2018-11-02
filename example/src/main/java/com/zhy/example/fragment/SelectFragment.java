@@ -1,15 +1,18 @@
-package com.zhy.example;
+package com.zhy.example.fragment;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.zhy.example.R;
 import com.zhy.zlib.utils.SelecteUtil;
 import com.zhy.zlib.view.TopBar;
 
+import java.util.List;
+
 import butterknife.BindView;
 
-public class OneFragment extends BaseFragment {
+public class SelectFragment extends BaseFragment {
     @BindView(R.id.text)
     TextView text;
     @BindView(R.id.topbar)
@@ -17,23 +20,15 @@ public class OneFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        final List<TextView> tvs = topbar.selectBar.getTvs();
         topbar.setSelectListener(new SelecteUtil.Onselecte() {
             @Override
             public boolean onselected(View v, int index) {
-                switch (index) {
-                    case 0:
-                        text.setBackgroundColor(0xffff0000);
-                        break;
-                    case 1:
-                        text.setBackgroundColor(0xff00ff00);
-                        break;
-                    case 2:
-                        text.setBackgroundColor(0xff0000ff);
-                        break;
-                }
+                text.setText(tvs.get(index).getText());
                 return false;
             }
         });
+        topbar.selectBar.slu.doSelecte(0);
     }
 
     @Override

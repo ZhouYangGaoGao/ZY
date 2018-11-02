@@ -28,7 +28,7 @@ import com.zhy.zlib.utils.SelecteUtil;
  * 用途 :通用topbar
  */
 public class TopBar extends RelativeLayout {
-    private SelectBar selectBar;
+    public SelectBar selectBar;
     public ImageView L1, L2, R1, R2;
     public TextView LT, CT, RT;
     public TopBar(Context context) {

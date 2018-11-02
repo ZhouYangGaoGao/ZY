@@ -1,8 +1,7 @@
-package com.zhy.example;
+package com.zhy.example.fragment;
 
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -10,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wang.avi.AVLoadingIndicatorView;
+import com.zhy.example.R;
 import com.zhy.zlib.Base.LibConfig;
 import com.zhy.zlib.adapter.CommonAdapter;
 import com.zhy.zlib.listener.AddView;
@@ -21,10 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
-public class ThreeFragment extends BaseFragment {
+public class PagerFragment extends BaseFragment {
     @BindView(R.id.my_viewPager)
     AutoScrollViewPager myViewPager;
     @BindView(R.id.dot_layout)

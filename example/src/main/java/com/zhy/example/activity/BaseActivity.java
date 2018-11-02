@@ -1,4 +1,4 @@
-package com.zhy.example;
+package com.zhy.example.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

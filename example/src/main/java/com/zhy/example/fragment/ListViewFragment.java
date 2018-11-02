@@ -1,10 +1,11 @@
-package com.zhy.example;
+package com.zhy.example.fragment;
 
 import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.wang.avi.AVLoadingIndicatorView;
+import com.zhy.example.R;
 import com.zhy.zlib.Base.LibConfig;
 import com.zhy.zlib.Base.ListFragment;
 import com.zhy.zlib.adapter.CommonAdapter;

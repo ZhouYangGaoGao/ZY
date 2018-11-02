@@ -1,6 +1,7 @@
 package com.zhy.example.fragment;
 
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.View;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -18,9 +19,11 @@ public class ListViewFragment extends ListFragment {
 
     List<String> datas = new ArrayList<>();
 
+
     @Override
     public void initAdapter() {
-        adapter = new CommonAdapter<String>(getContext(), datas, R.layout.item_listfragment) {
+        setGrid(true);
+        adapter = new CommonAdapter<String>(getContext(), datas, R.layout.item_gridfragment) {
             @Override
             public void convert(ViewHolder h, String i) {
                 AVLoadingIndicatorView view = h.getView(R.id.avl);
@@ -28,6 +31,9 @@ public class ListViewFragment extends ListFragment {
                 h.setText(R.id.avl_name, i);
             }
         };
+        gridView.setNumColumns(4);
+        gridView.setGravity(Gravity.CENTER);
+
     }
 
     @Override

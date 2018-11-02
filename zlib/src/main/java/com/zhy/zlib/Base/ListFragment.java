@@ -20,16 +20,9 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
     public SmartRefreshLayout refresh;
     public TopBar topbar;
     public CommonAdapter adapter;
-    public int page=0;
+    public int page = 0;
     public GridView gridView;
-    private boolean isGrid=false;
-
-    public ListFragment() {
-    }
-
-    public ListFragment(boolean isGrid) {
-        this.isGrid = isGrid;
-    }
+    boolean isGrid = false;
 
     @Override
     public View contentView(Bundle savedInstanceState) {
@@ -44,10 +37,14 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
         refresh = (SmartRefreshLayout) findViewById(R.id.refresh);
         topbar = (TopBar) findViewById(R.id.topbar);
         initAdapter();
-        if (isGrid){
+        if (isGrid) {
+            listview.setVisibility(View.GONE);
+            gridView.setVisibility(View.VISIBLE);
             gridView.setAdapter(adapter);
             gridView.setEmptyView(emptyView);
-        }else {
+        } else {
+            gridView.setVisibility(View.GONE);
+            listview.setVisibility(View.VISIBLE);
             listview.setAdapter(adapter);
             listview.setEmptyView(emptyView);
             listview.addFooterView(new View(getContext()));
@@ -57,6 +54,9 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
         refresh.setOnRefreshLoadMoreListener(this);
         initViewData();
     }
+    public void setGrid(boolean grid) {
+        isGrid = grid;
+    }
 
     abstract public void initAdapter();
 
@@ -65,8 +65,10 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
     abstract public void getData();
 
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {}
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+    }
 
     @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {}
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+    }
 }

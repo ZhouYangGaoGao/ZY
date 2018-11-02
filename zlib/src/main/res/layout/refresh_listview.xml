@@ -20,6 +20,12 @@
             android:paddingRight="12dp"
             android:scrollbars="none" />
 
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="match_parent" />
+
         <LinearLayout
             android:id="@+id/empty_view"
             android:layout_width="match_parent"

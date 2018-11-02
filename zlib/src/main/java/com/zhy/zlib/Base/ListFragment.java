@@ -3,6 +3,7 @@ package com.zhy.zlib.Base;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -20,6 +21,15 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
     public TopBar topbar;
     public CommonAdapter adapter;
     public int page=0;
+    public GridView gridView;
+    private boolean isGrid=false;
+
+    public ListFragment() {
+    }
+
+    public ListFragment(boolean isGrid) {
+        this.isGrid = isGrid;
+    }
 
     @Override
     public View contentView(Bundle savedInstanceState) {
@@ -29,14 +39,21 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
     @Override
     public void initView() {
         listview = (ListView) findViewById(R.id.listview);
+        gridView = (GridView) findViewById(R.id.gridview);
         emptyView = (LinearLayout) findViewById(R.id.empty_view);
         refresh = (SmartRefreshLayout) findViewById(R.id.refresh);
         topbar = (TopBar) findViewById(R.id.topbar);
         initAdapter();
-        listview.setAdapter(adapter);
-        listview.setEmptyView(emptyView);
-        listview.addFooterView(new View(getContext()));
-        listview.addHeaderView(new View(getContext()));
+        if (isGrid){
+            gridView.setAdapter(adapter);
+            gridView.setEmptyView(emptyView);
+        }else {
+            listview.setAdapter(adapter);
+            listview.setEmptyView(emptyView);
+            listview.addFooterView(new View(getContext()));
+            listview.addHeaderView(new View(getContext()));
+        }
+
         refresh.setOnRefreshLoadMoreListener(this);
         initViewData();
     }
@@ -48,12 +65,8 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
     abstract public void getData();
 
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
-    }
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {}
 
     @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
-    }
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {}
 }

@@ -31,9 +31,6 @@ public class ListViewFragment extends ListFragment {
                 h.setText(R.id.avl_name, i);
             }
         };
-        gridView.setNumColumns(4);
-        gridView.setGravity(Gravity.CENTER);
-
     }
 
     @Override

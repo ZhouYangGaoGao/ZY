@@ -17,6 +17,9 @@ import com.zhy.zlib.manager.AppManager;
 import com.zhy.zlib.utils.LogUtils;
 import com.zhy.zlib.utils.ScreenUtils;
 
+/**
+ * 项目 Activity 抽象基类
+ */
 public abstract class LibActivity extends AppCompatActivity implements CommonListener {
     /**
      * 加载框
@@ -249,7 +252,6 @@ public abstract class LibActivity extends AppCompatActivity implements CommonLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 结束Activity&从堆栈中移除
         AppManager.getAppManager().finishActivity(this);
         disLoading();
     }

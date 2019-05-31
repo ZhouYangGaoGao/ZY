@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.zlib.view.SelectBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sb_place"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    app:Textcolor="@color/colorWhite"
+    app:TextcolorUn="@color/colorWhite"/>

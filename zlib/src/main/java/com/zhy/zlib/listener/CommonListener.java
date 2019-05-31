@@ -28,5 +28,6 @@ CommonListener {
     View getView(int id);
 
     void showLoading();
+
     void disLoading();
 }

@@ -1,1 +1,1 @@
-include ':zlib', ':example'
+include ':zlib', ':example', ':Anim', ':Holo Festival', ':Holo VIP', ':Tree'

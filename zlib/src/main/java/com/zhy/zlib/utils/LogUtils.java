@@ -9,7 +9,7 @@ public class LogUtils {
     public static boolean debug = false;// 正式环境
 //    public static boolean debug = true;// 测试环境
 
-    public static String tag = "DBX";
+    public static String tag = "HOLO -->";
 
     public static void d(String local, String msg) {
         if (showLog)

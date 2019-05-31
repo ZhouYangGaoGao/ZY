@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class DateUtil {
@@ -18,6 +19,26 @@ public class DateUtil {
     public static final String YEAR_PATTERN = "yyyy";
     public static final String MINUTE_ONLY_PATTERN = "mm";
     public static final String HOUR_ONLY_PATTERN = "HH";
+
+
+
+
+    /**
+     * 将毫秒时间戳字符串转为时间字符串
+     *
+     * @param milliString 毫秒字符串
+     * @param pattern     时间格式
+     * @return
+     */
+    public static String milliString2String(String milliString, String pattern) {
+        String dateString = "";
+        if (!TextUtils.isEmpty(milliString)) {
+            dateString = new SimpleDateFormat(pattern, Locale.getDefault()).format(new Date(Long.parseLong(milliString)));
+        }
+        return dateString;
+
+    }
+
 
     /**
      * 日期相加减天数

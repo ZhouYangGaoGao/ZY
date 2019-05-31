@@ -1,6 +1,7 @@
 package com.zhy.zlib.Base;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -49,7 +50,7 @@ public abstract class LibActivity extends AppCompatActivity implements CommonLis
     /**
      * 加载框中文字的字体大小
      */
-    private float loadingMsgSize = 12;
+    private float loadingMsgSize = 15;
 
     /**
      * 是否可以点击外界消失加载框
@@ -264,6 +265,24 @@ public abstract class LibActivity extends AppCompatActivity implements CommonLis
         super.onCreate(savedInstanceState);
         // 添加Activity到堆栈
         AppManager.getAppManager().addActivity(this);
+        intent = getIntent();
     }
 
+    private Intent intent;
+
+    public String intentString(String key) {
+        return intent.getStringExtra(key);
+    }
+
+    public int intentInt(String key) {
+        return intent.getIntExtra(key, 0);
+    }
+
+    public boolean intentBoolean(String key) {
+        return intent.getBooleanExtra(key, false);
+    }
+
+    public double intentDouble(String key) {
+        return intent.getDoubleExtra(key, 0d);
+    }
 }

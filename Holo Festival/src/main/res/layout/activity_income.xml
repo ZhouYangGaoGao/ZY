@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTheme"
+    android:orientation="vertical">
+
+    <com.zhy.zlib.view.TopBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isFinish="true"
+        app:LT="返回"
+        app:CT="@string/str_incom" />
+
+    <com.zhy.zlib.view.SelectBar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:background="@drawable/shape_bg"
+        app:Text="商品名称|库存|单价|卖出|退货|结算"
+        app:Textcolor="@color/colorWhite"
+        app:TextcolorUn="@color/colorWhite" />
+
+    <fragment
+        android:id="@+id/fg_order"
+        android:layout_width="match_parent"
+        android:name="com.bai.nfc.fragment.OrderListFragment"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

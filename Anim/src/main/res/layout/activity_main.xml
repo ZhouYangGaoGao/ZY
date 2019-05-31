@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aa0000" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/my_viewPager"
+        android:background="@color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent" />
+
+    <com.example.anim.view.MaterialMenuView
+        android:id="@+id/material_menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:mm_color="#fff"
+        app:mm_scale="1"
+        app:mm_strokeWidth="2"
+        app:mm_transformDuration="2000" />
+
+    <com.zhy.zlib.view.SelectBar
+        android:id="@+id/selectBar"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:Text="BURGER|ARROW|X|CHECK" />
+</RelativeLayout>

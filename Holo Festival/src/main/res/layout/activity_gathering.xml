@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.zlib.view.TopBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:CT="收款"
+        app:LT="返回"
+        app:isFinish="true" />
+
+
+    <EditText
+        android:id="@+id/et_rmb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="40dp"
+        android:gravity="center"
+        android:hint="请输入人民币金额" />
+
+    <TextView
+        android:id="@+id/tv_rate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="RMB-HOLO币比例：6.6：1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_holo"
+        android:layout_width="match_parent"
+        android:textSize="25sp"
+        android:text="0.0 HOLO"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

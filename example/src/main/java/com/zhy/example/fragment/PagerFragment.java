@@ -1,5 +1,6 @@
 package com.zhy.example.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.TextView;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.example.R;
+import com.zhy.example.activity.DemoActivity;
 import com.zhy.zlib.Base.LibConfig;
 import com.zhy.zlib.adapter.CommonAdapter;
 import com.zhy.zlib.listener.AddView;
+import com.zhy.zlib.listener.TopListener;
 import com.zhy.zlib.utils.SelecteUtil;
 import com.zhy.zlib.view.AutoScrollViewPager;
 import com.zhy.zlib.view.TopBar;
@@ -57,7 +60,12 @@ public class PagerFragment extends BaseFragment {
                 av.setIndicator(i);
             }
         });
-
+        topbar.setOnTopListener(new TopListener() {
+            @Override
+            public void l1Click() {
+                startActivity(new Intent(getActivity(), DemoActivity.class));
+            }
+        });
 
     }
 

@@ -1,0 +1,230 @@
+商户登录
+接口：merchantLogin.do
+入参：String merchantId //商户id
+	  String password//商户密码
+
+出参：String errorCode
+      String errorMsg
+
+商品录入
+接口：addGoods.do
+入参：{
+		"merchantId":"",//商户id
+		"goodsJsonBean":{
+			"goodsName":"",//商品名称
+			"goodsPrice":"",//商品价格 int类型
+			"goodsAmount":""//商户数量 int类型
+
+		}
+	  }
+
+出参：String errorCode
+      String errorMsg
+
+查询商户分类列表
+接口：queryClassifyList.do
+入参：{
+		"merchantId":"",//商户ID
+          }
+
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		               "list":[{
+				"classifyId":"",//分类ID
+				"merchantId":"",//商户ID
+				"classifyName":"",//分类名称
+			}
+			……
+			]
+
+	  }
+查询商户商品列表
+接口：queryGoodsList.do
+入参：{
+		"merchantId":"",//商户ID
+		"goodsName":"",//商品名称，模糊查询用
+		"pageInfo":{
+			"pageNum":"",//当前页
+			"pageSize":""//每一页数据条数
+
+		}
+	  }
+
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		"pageInfo":{
+			"total":"",//总数据条数
+			“pages":"",//总页数
+			"pageNum":"",//当前页
+			"pageSize":"",//每一页数据条数
+			"list":[{
+				"goodsId":"",//商品ID
+				"merchantId":"",//商户ID
+				"goodsName":"",//商品名称
+				"goodsPrice":"",//商品单价
+				"goodsAmount":""//商品数量
+			}
+			……
+			]
+
+		}
+	  }
+
+
+校验手环是否可消费,并拉出客户信息
+接口：checkHandRing.do
+入参：String handRingId//手环ID
+	  String handRingCode//手环密码
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		"customer":{
+			"customerId":"",//客户ID
+			“handRingId":"",//手环ID
+			"phoneNumber":"",//手机号
+			"idType":"",//证件类型
+			"idNumber":"",//证件号
+			"customerName":"",//客户姓名
+			"accountBalance":""//账户余额
+
+		}
+	  }
+
+客户消费Holo币接口
+接口：consumHoloCoin.do
+入参：{
+		"merchantId":"",//商户ID
+		"customerId":"",//客户ID
+		"buyJournals":[{
+			"goodsId":"",//商品ID
+			"quantity":""//购买数量
+			"price"：//价格，选填
+
+		}
+		……
+		]
+	  }
+出参：String errorCode
+      String errorMsg
+
+查询商户订单记录接口
+接口：queryOrderRecord.do
+入参：{
+		"merchantId":"",//商户ID
+		"pageInfo":{
+			"pageNum":"",//当前页
+			"pageSize":""//每一页数据条数
+
+		}
+	  }
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		"pageInfo":{
+			"total":"",//总数据条数
+			“pages":"",//总页数
+			"pageNum":"",//当前页
+			"pageSize":"",//每一页数据条数
+			"list":[{
+				"consumptionId":"",//购买流水ID
+				"customerId":"",//客户ID
+				"phoneNumber":"",//客户手机号
+				"consumptionAmount":"",//订单总金额
+				"merchantId":"",//商户ID
+				"consumptionTime":""//购买时间
+				}
+			……
+			]
+
+		}
+	  }
+
+查询订单商品记录接口
+接口：querySalesRecord.do
+入参：String merchantId//商户ID
+	  String consumptionId//购买流水ID
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		"buyJournals":[{
+			"buyJournalId":"",//购买商品ID
+			"goodsId":"",//商品ID
+			"goodsName":"",//商品名称
+			"consumptionId":"",//购买流水ID
+			"quantity":"",//购买数量
+			"price":""//购买价格
+	    		buyJournalRs[{
+				"buyJournalRId":"",//购买商品ID
+				"buyJournalId":"",//购买商品ID
+				"goodsId":"",//商品ID
+				"consumptionRId":"",//购买流水ID
+				"consumptionId":"",//购买流水ID
+				"quantity":"",//退货数量
+				"price":""//价格
+			}]
+
+		}
+		……
+		]
+	  }
+
+
+根据商户ID和手环ID查询订单
+接口：queryOrderByMIdAndHId.do
+入参：String merchantId
+          String handRingId
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		"consumptions":[{
+			"consumptionId":"",//消费流水ID
+			"customerId":"",//客户ID
+			"phoneNumber":"",//客户电话号码
+			"consumptionAmount":"",//消费总金额
+			"merchantId":""//商户ID
+			"consumptionTime":""//购买时间
+
+		}
+		……
+		]
+	  }
+
+
+给客户退Holo币
+接口：refundHoloCoin.do
+入参：{
+		"merchantId":"",//商户ID
+		"customerId":"",//客户ID
+		"consumptionId":"",//订单ID
+		"buyJournals":[{
+			"buyJournalId":"",//购买商品记录ID
+			"goodsId":"",//商品ID
+			"quantity":""//退货数量
+
+		}
+		……
+		]
+	  }
+出参：String errorCode
+          String errorMsg
+
+获取明细信息
+接口：getDetailed.do
+入参：String merchantId
+出参：{
+		"errorCode":"",
+		"errorMsg":"",
+		"detaileds":[{
+			"goodsId":"",//商品ID
+			"goodsAmount":"",//商品库存数量
+			"goodsPrice":"",//商品价格
+			"quantity":"",//卖出个数
+			"quantityR":""//退货个数
+			"priceAll":""//卖出商品总钱数
+
+		}
+		……
+		]
+	  }

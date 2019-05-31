@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zhy.zlib.view.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:CT="点单"
+        app:LT="返回"
+        app:isFinish="true"
+        app:RT="@string/str_balance" />
+
+    <ListView
+        android:id="@+id/lv_type"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
+        android:visibility="gone"
+        android:background="@color/colorTheme"
+        android:layout_marginBottom="70dp"
+        android:scrollbars="none" />
+
+    <fragment
+        android:id="@+id/fg_home"
+        android:name="com.bai.nfc.fragment.GoodsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
+        android:layout_marginBottom="70dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2B2B2B"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:textColor="@color/colorWhite"
+            android:text="总价: 0 H" />
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/colorBlue"
+            android:gravity="center"
+            android:text="@string/str_pay"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -12,4 +12,8 @@ public class ClickListener {
 
     }
     public void onDismiss(){}
+
+    public void onChange(Object arg){
+
+    }
 }

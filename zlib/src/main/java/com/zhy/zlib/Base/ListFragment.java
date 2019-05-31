@@ -1,32 +1,54 @@
 package com.zhy.zlib.Base;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.zhy.zlib.R;
 import com.zhy.zlib.adapter.CommonAdapter;
+import com.zhy.zlib.utils.ScreenUtils;
 import com.zhy.zlib.view.TopBar;
 
 /**
  * ListView GridView Fragment 封装类
  */
 public abstract class ListFragment extends LibFragment implements OnRefreshLoadMoreListener {
-    public ListView listview;
-    public LinearLayout emptyView;
-    public SmartRefreshLayout refresh;
+    /**
+     * 刷新加载
+     */
+    protected SmartRefreshLayout refresh;
+    /**
+     * 顶部控件
+     */
     public TopBar topbar;
-    public CommonAdapter adapter;
-    public int page = 0;
-    public GridView gridView;
-    boolean isGrid = false;
+    /**
+     * listView 和 GridView 的适配器
+     */
+    private CommonAdapter adapter;
+    /**
+     * 页码
+     */
+    public int page = 1;
 
+    /**
+     * 设置当前页面跟布局
+     *
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View contentView(Bundle savedInstanceState) {
         return getView(R.layout.topbar_listview);
@@ -37,31 +59,54 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
      */
     @Override
     public void initView() {
-        listview = (ListView) findViewById(R.id.listview);
-        gridView = (GridView) findViewById(R.id.gridview);
-        emptyView = (LinearLayout) findViewById(R.id.empty_view);
+        ListView listview = (ListView) findViewById(R.id.listview);
+        GridView gridView = (GridView) findViewById(R.id.gridview);
+        LinearLayout emptyView = (LinearLayout) findViewById(R.id.empty_view);
         refresh = (SmartRefreshLayout) findViewById(R.id.refresh);
+        refresh.setEnableAutoLoadMore(false);
+        refresh.setRefreshFooter(new ClassicsFooter(getContext()));
+        refresh.setPrimaryColorsId(R.color.colorTheme, R.color.colorWhite);
         topbar = (TopBar) findViewById(R.id.topbar);
-        initAdapter();
-        if (isGrid) {
+        emptyView.addView(addEmptyView());
+        emptyView.setGravity(17);
+        if (isGrid()) {
             listview.setVisibility(View.GONE);
             gridView.setVisibility(View.VISIBLE);
-            gridView.setAdapter(adapter);
+            gridView.setNumColumns(numColumns());
+            gridView.setVerticalSpacing(setVerticalSpacing());
+            gridView.setHorizontalSpacing(setHorizontalSpacing());
+            gridView.setAdapter(adapter = initAdapter());
             gridView.setEmptyView(emptyView);
         } else {
             gridView.setVisibility(View.GONE);
             listview.setVisibility(View.VISIBLE);
-            listview.setAdapter(adapter);
+            listview.setAdapter(adapter = initAdapter());
             listview.setEmptyView(emptyView);
-            listview.addFooterView(new View(getContext()));
-            listview.addHeaderView(new View(getContext()));
+            listview.addFooterView(addFooter());
+            listview.addHeaderView(addHearder());
+            listview.setDivider(setDivider());
+            listview.setDividerHeight(setDividerHeight());
         }
 
         refresh.setOnRefreshLoadMoreListener(this);
         initViewData();
     }
-    public void setGrid(boolean grid) {
-        isGrid = grid;
+
+    public int setDividerHeight() {
+        return ScreenUtils.dip2px(getContext(), 1);
+    }
+
+    public Drawable setDivider() {
+        return new ColorDrawable(0x00ffffff);
+    }
+
+    /**
+     * 给 listView 添加尾部
+     *
+     * @return
+     */
+    public View addFooter() {
+        return new View(getContext());
     }
 
     /**
@@ -157,5 +202,13 @@ public abstract class ListFragment extends LibFragment implements OnRefreshLoadM
      */
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+    }
+
+    public int setVerticalSpacing(){
+        return 10;
+    }
+
+    public int setHorizontalSpacing(){
+        return 10;
     }
 }

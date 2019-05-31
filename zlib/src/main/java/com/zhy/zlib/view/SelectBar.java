@@ -68,7 +68,14 @@ public class SelectBar extends LinearLayout {
         isBottomTab = t.getBoolean(R.styleable.SelectBar_isBottomTab, false);
         t.recycle();
 
+        initText(str, line, tsUn, ts, tc, tcUn, isLongLine, isBottomTab);
+    }
 
+    public void initText(String str) {
+        initText(str, null, sp2px(14), sp2px(14), 0xffffffff, 0xffffffff, false, false);
+    }
+
+    private void initText(String str, Drawable line, float tsUn, float ts, int tc, int tcUn, boolean isLongLine, boolean isBottomTab) {
         if (str != null && !str.equals("")) {
             String[] tt = str.split("\\|");
 
@@ -194,7 +201,7 @@ public class SelectBar extends LinearLayout {
                     } else {
                         itemlp = new LayoutParams(0, sp2px(44), 1);
                         llp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                        textlp = new LayoutParams(sp2px(56), ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                        textlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
                     }
                 }
                 ll.addView(tv, textlp);

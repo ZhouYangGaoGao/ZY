@@ -1,7 +1,6 @@
 package com.zhy.example.fragment;
 
 import android.support.annotation.NonNull;
-import android.view.Gravity;
 import android.view.View;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -17,13 +16,11 @@ import java.util.List;
 
 public class ListViewFragment extends ListFragment {
 
-    List<String> datas = new ArrayList<>();
-
+    List<String> datas;
 
     @Override
-    public void initAdapter() {
-        setGrid(true);
-        adapter = new CommonAdapter<String>(getContext(), datas, R.layout.item_gridfragment) {
+    public CommonAdapter initAdapter() {
+        return new CommonAdapter<String>(getContext(), datas = new ArrayList<>(), R.layout.item_gridfragment) {
             @Override
             public void convert(ViewHolder h, String i) {
                 AVLoadingIndicatorView view = h.getView(R.id.avl);
@@ -35,14 +32,21 @@ public class ListViewFragment extends ListFragment {
 
     @Override
     public void initViewData() {
-        topbar.CT.setText("ListView");
-        topbar.LT.setText("show");
-        topbar.L1.setVisibility(View.GONE);
-        adapter.notifyDataSetChanged();
+        topbar.mCenterText.setText("ListFragment");
+        topbar.mLeftText.setText("showLosding");
+        topbar.mRightText.setText("clear");
+        topbar.mLeftImg1.setVisibility(View.GONE);
+        topbar.mRightImg1.setVisibility(View.GONE);
         topbar.setOnTopListener(new TopListener() {
             @Override
             public void lTClick() {
                 showLoading();
+            }
+
+            @Override
+            public void rTClick() {
+                datas.clear();
+                upData();
             }
         });
     }
@@ -50,7 +54,8 @@ public class ListViewFragment extends ListFragment {
     @Override
     public void getData() {
         datas.add(LibConfig.loading_name[page]);
-        onFinish("getData", "onFinish");
+        upData();
+        onFinish("", "");
     }
 
     @Override
@@ -60,21 +65,20 @@ public class ListViewFragment extends ListFragment {
             getData();
         } else {
             showToast("到底了");
-            onFinish("到底了", "");
+            onFinish("", "");
         }
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         datas.clear();
-        page = 1;
+        page = 0;
         getData();
     }
 
     @Override
     public void onFinish(String Tag, String value) {
-        refresh.finishLoadMore(300);
-        refresh.finishRefresh(300);
-        adapter.notifyDataSetChanged();
+        finishRefreshAndLoadMore();
+        upData();
     }
 }

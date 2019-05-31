@@ -6,11 +6,14 @@ import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhy.zlib.R;
 import com.zhy.zlib.listener.ClickListener;
+
+import java.math.BigDecimal;
 
 /**
  * Created by zhouyang on 2018/9/12.
@@ -71,6 +74,49 @@ public class DialogUtils {
                 public void onClick(View v) {
                     dialog.dismiss();
                     if (listener != null) listener.yes();
+                }
+            });
+            if (TextUtils.isEmpty(title)) {
+                view.findViewById(R.id.dialog_title).setVisibility(View.GONE);
+            } else {
+                TextView tvTitle = view.findViewById(R.id.dialog_title);
+                tvTitle.setText(title);
+            }
+            TextView tvMessage = view.findViewById(R.id.dialog_message);
+            tvMessage.setText(message);
+            TextView tvBtu = view.findViewById(R.id.tv_ok);
+            tvBtu.setText(btuName);
+            dialog.addContentView(view, new LinearLayout.LayoutParams(ScreenUtils.dip2px(context, 288), ScreenUtils.dip2px(context, 185)));
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    dialog = null;
+                }
+            });
+        }
+
+        dialog.show();
+    }
+
+
+    public static void showEditeDialog(Context context, String title, String message, String btuName, final ClickListener listener) {
+        if (dialog == null) {
+            View view = View.inflate(context, R.layout.dialog_edit, null);
+            final EditText et = view.findViewById(R.id.ed_content);
+            dialog = new Dialog(context);
+            view.findViewById(R.id.tv_ok).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String priceStr = et.getText().toString().trim();
+                    if (!TextUtils.isEmpty(priceStr)) {
+                        if (listener != null) {
+                            LogUtils.e("priceStr===>", new BigDecimal(priceStr).multiply(new BigDecimal(100+"")) + "");
+                            listener.onChange(new BigDecimal(priceStr).multiply(new BigDecimal(100 + "")).intValue());
+                        }
+                    }
+
                 }
             });
             if (TextUtils.isEmpty(title)) {

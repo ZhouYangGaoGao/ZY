@@ -44,4 +44,19 @@
     <color name="react">#ffffff</color>
     <color name="scanLineColor">#ffffff</color>
 
+
+    <array name="clos">
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#ff0000 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+        <item >#5B5EE4 </item>
+    </array>
+
 </resources>

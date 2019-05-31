@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -28,9 +26,9 @@ import com.zhy.zlib.utils.SelecteUtil;
  * 用途 :通用topbar
  */
 public class TopBar extends RelativeLayout {
-    public SelectBar selectBar;
-    public ImageView L1, L2, R1, R2;
-    public TextView LT, CT, RT;
+    public SelectBar mSelectBar;
+    public ImageView mLeftImg1, mLeftImg2, mRightImg1, mRightImg2;
+    public TextView mLeftText, mCenterText, mRightText;
     public TopBar(Context context) {
         this(context, null);
     }
@@ -66,8 +64,8 @@ public class TopBar extends RelativeLayout {
         lt = t.getString(R.styleable.TopBar_LT);
         rt = t.getString(R.styleable.TopBar_RT);
         ct = t.getString(R.styleable.TopBar_CT);
-        ts = t.getDimension(R.styleable.TopBar_Tsize, sp2px(17));
-        iw = t.getDimension(R.styleable.TopBar_ImgWidth, dip2px(24));
+        ts = t.getDimension(R.styleable.TopBar_Tsize, sp2px(18));
+        iw = t.getDimension(R.styleable.TopBar_ImgWidth, dip2px(22));
         tc = t.getColor(R.styleable.TopBar_Tcolor, 0xffffffff);
         isLongLine = t.getBoolean(R.styleable.TopBar_SelectLongLine, false);
         isFinish = t.getBoolean(R.styleable.TopBar_isFinish, false);
@@ -92,123 +90,122 @@ public class TopBar extends RelativeLayout {
 
 
         if (l1 != null) {
-            L1 = new ImageView(context);
-            L1.setImageDrawable(l1);
-            left.addView(L1, imglp);
-            L1.setOnClickListener(new OnClickListener() {
+            mLeftImg1 = new ImageView(context);
+            mLeftImg1.setImageDrawable(l1);
+            left.addView(mLeftImg1, imglp);
+            mLeftImg1.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.l1Click();
+                    if (mTopListener != null)
+                        mTopListener.l1Click();
                 }
             });
         } else if (isFinish) {
-            L1 = new ImageView(context);
-            L1.setImageResource(R.drawable.back);
-            left.addView(L1, imglp);
-            L1.setOnClickListener(new OnClickListener() {
+            mLeftImg1 = new ImageView(context);
+            mLeftImg1.setImageResource(R.drawable.back);
+            left.addView(mLeftImg1, imglp);
+            mLeftImg1.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ((Activity) context).finish();
-
                 }
             });
         }
         if (lt != null) {
             String ltt[] = lt.split("\\|");
             if (ltt.length > 1) {
-                selectBar = new SelectBar(context);
+                mSelectBar = new SelectBar(context);
                 for (int i = 0; i < ltt.length; i++) {
                     if (i == 0)
-                        selectBar.addText(ltt[0], selectts, selecttc, selectTline, true, isLongLine, false);
+                        mSelectBar.addText(ltt[0], selectts, selecttc, selectTline, true, isLongLine, false);
                     else
-                        selectBar.addText(ltt[i], selecttsUn, selecttcun, selectTline, false, isLongLine, false);
+                        mSelectBar.addText(ltt[i], selecttsUn, selecttcun, selectTline, false, isLongLine, false);
                 }
-                selectBar.setSelect(selecttc, selecttcun, selectts, selecttsUn);
+                mSelectBar.setSelect(selecttc, selecttcun, selectts, selecttsUn);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dip2px(47), 1);
                 lp.setMargins(dip2px(6), 0, dip2px(6), 0);
-                left.addView(selectBar, lp);
+                left.addView(mSelectBar, lp);
             } else {
-                LT = new TextView(context);
-                LT.setText(lt);
-                LT.setSingleLine();
-                LT.setGravity(Gravity.CENTER);
-                LT.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
-                LT.setTextColor(tc);
-                left.addView(LT, tvlp);
-                LT.setOnClickListener(new OnClickListener() {
+                mLeftText = new TextView(context);
+                mLeftText.setText(lt);
+                mLeftText.setSingleLine();
+                mLeftText.setGravity(Gravity.CENTER);
+                mLeftText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
+                mLeftText.setTextColor(tc);
+                left.addView(mLeftText, tvlp);
+                mLeftText.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (isFinish) {
                             ((Activity) context).finish();
-                        } else if (listener != null)
-                            listener.lTClick();
+                        } else if (mTopListener != null)
+                            mTopListener.lTClick();
                     }
                 });
             }
         }
         if (l2 != null) {
-            L2 = new ImageView(context);
-            L2.setImageDrawable(l2);
-            left.addView(L2, imglp);
-            L2.setOnClickListener(new OnClickListener() {
+            mLeftImg2 = new ImageView(context);
+            mLeftImg2.setImageDrawable(l2);
+            left.addView(mLeftImg2, imglp);
+            mLeftImg2.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.l2Click();
+                    if (mTopListener != null)
+                        mTopListener.l2Click();
                 }
             });
         }
 
         if (r2 != null) {
-            R2 = new ImageView(context);
-            R2.setImageDrawable(r2);
-            right.addView(R2, imglp);
-            R2.setOnClickListener(new OnClickListener() {
+            mRightImg2 = new ImageView(context);
+            mRightImg2.setImageDrawable(r2);
+            right.addView(mRightImg2, imglp);
+            mRightImg2.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.r2Click();
+                    if (mTopListener != null)
+                        mTopListener.r2Click();
                 }
             });
         }
         if (rt != null) {
             String rtt[] = rt.split("\\|");
             if (rtt.length > 1) {
-                selectBar = new SelectBar(context);
+                mSelectBar = new SelectBar(context);
                 for (int i = 0; i < rtt.length; i++) {
                     if (i == 0)
-                        selectBar.addText(rtt[0], selectts, selecttc, selectTline, true, isLongLine, false);
+                        mSelectBar.addText(rtt[0], selectts, selecttc, selectTline, true, isLongLine, false);
                     else
-                        selectBar.addText(rtt[i], selectts, selecttcun, selectTline, false, isLongLine, false);
+                        mSelectBar.addText(rtt[i], selectts, selecttcun, selectTline, false, isLongLine, false);
                 }
-                selectBar.setSelect(selecttc, selecttcun, selectts, selecttsUn);
-                right.addView(selectBar, new LinearLayout.LayoutParams(0, dip2px(47), 1));
+                mSelectBar.setSelect(selecttc, selecttcun, selectts, selecttsUn);
+                right.addView(mSelectBar, new LinearLayout.LayoutParams(0, dip2px(47), 1));
             } else {
-                RT = new TextView(context);
-                RT.setText(rt);
-                RT.setGravity(Gravity.CENTER);
-                RT.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
-                right.addView(RT, tvlp);
-                RT.setTextColor(tc);
-                RT.setOnClickListener(new OnClickListener() {
+                mRightText = new TextView(context);
+                mRightText.setText(rt);
+                mRightText.setGravity(Gravity.CENTER);
+                mRightText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
+                right.addView(mRightText, tvlp);
+                mRightText.setTextColor(tc);
+                mRightText.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (listener != null)
-                            listener.rTClick();
+                        if (mTopListener != null)
+                            mTopListener.rTClick();
                     }
                 });
             }
         }
         if (r1 != null) {
-            R1 = new ImageView(context);
-            R1.setImageDrawable(r1);
-            right.addView(R1, imglp);
-            R1.setOnClickListener(new OnClickListener() {
+            mRightImg1 = new ImageView(context);
+            mRightImg1.setImageDrawable(r1);
+            right.addView(mRightImg1, imglp);
+            mRightImg1.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.r1Click();
+                    if (mTopListener != null)
+                        mTopListener.r1Click();
                 }
             });
         }
@@ -219,8 +216,8 @@ public class TopBar extends RelativeLayout {
             C.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.cClick();
+                    if (mTopListener != null)
+                        mTopListener.cClick();
                 }
             });
 
@@ -230,33 +227,33 @@ public class TopBar extends RelativeLayout {
         if (ct != null) {
             String tt[] = ct.split("\\|");
             if (tt.length > 1) {
-                selectBar = new SelectBar(context);
+                mSelectBar = new SelectBar(context);
                 for (int i = 0; i < tt.length; i++) {
                     if (i == 0)
-                        selectBar.addText(tt[0], selectts, selecttc, selectTline, true, isLongLine, false);
+                        mSelectBar.addText(tt[0], selectts, selecttc, selectTline, true, isLongLine, false);
                     else
-                        selectBar.addText(tt[i], selectts, selecttcun, selectTline, false, isLongLine, false);
+                        mSelectBar.addText(tt[i], selectts, selecttcun, selectTline, false, isLongLine, false);
                 }
-                selectBar.setSelect(selecttc, selecttcun, selectts, selecttsUn);
-                center.addView(selectBar, ctvlp);
+                mSelectBar.setSelect(selecttc, selecttcun, selectts, selecttsUn);
+                center.addView(mSelectBar, ctvlp);
             } else {
-                CT = new TextView(context);
-                CT.setText(ct);
-                CT.setGravity(Gravity.CENTER);
-                CT.setTextColor(tc);
-                CT.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
-                center.addView(CT, tvlp);
-                CT.setOnClickListener(new OnClickListener() {
+                mCenterText = new TextView(context);
+                mCenterText.setText(ct);
+                mCenterText.setGravity(Gravity.CENTER);
+                mCenterText.setTextColor(tc);
+                mCenterText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
+                center.addView(mCenterText, tvlp);
+                mCenterText.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (listener != null)
-                            listener.tClick();
+                        if (mTopListener != null)
+                            mTopListener.tClick();
                     }
                 });
             }
         }
-        if (selectBar != null)
-            selectBar.setBackgroundColor(0x00000000);
+        if (mSelectBar != null)
+            mSelectBar.setBackgroundColor(0x00000000);
         oldBar.setGravity(Gravity.CENTER_VERTICAL);
 
         leftClick.addView(left, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dip2px(48)));
@@ -281,11 +278,11 @@ public class TopBar extends RelativeLayout {
         addView(oldBar, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(48)));
     }
 
-    private TopListener listener;
+    private TopListener mTopListener;
 
     //设置点击事件监听器
     public void setOnTopListener(TopListener listener) {
-        this.listener = listener;
+        this.mTopListener = listener;
     }
 
 
@@ -299,14 +296,13 @@ public class TopBar extends RelativeLayout {
         return (int) (spValue * fontScale + 0.5f);
     }
 
-
     public void setTextSize(TextView textView, float textsize) {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, sp2px(textsize));
     }
 
     public void setSelectListener(SelecteUtil.Onselecte selectListener){
-        if (selectBar!=null){
-            selectBar.setOnselecte(selectListener);
+        if (mSelectBar !=null){
+            mSelectBar.setOnselecte(selectListener);
         }
     }
 

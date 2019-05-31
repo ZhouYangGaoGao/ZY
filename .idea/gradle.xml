@@ -8,6 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Anim" />
+            <option value="$PROJECT_DIR$/Holo Festival" />
+            <option value="$PROJECT_DIR$/Holo VIP" />
+            <option value="$PROJECT_DIR$/Tree" />
             <option value="$PROJECT_DIR$/example" />
             <option value="$PROJECT_DIR$/zlib" />
           </set>

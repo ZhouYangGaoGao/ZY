@@ -20,7 +20,7 @@ public class SelectFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        final List<TextView> tvs = topbar.selectBar.getTvs();
+        final List<TextView> tvs = topbar.mSelectBar.getTvs();
         topbar.setSelectListener(new SelecteUtil.Onselecte() {
             @Override
             public boolean onselected(View v, int index) {
@@ -28,7 +28,7 @@ public class SelectFragment extends BaseFragment {
                 return false;
             }
         });
-        topbar.selectBar.slu.doSelecte(0);
+        topbar.mSelectBar.slu.doSelecte(0);
     }
 
     @Override

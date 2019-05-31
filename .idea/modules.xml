@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Anim/Anim.iml" filepath="$PROJECT_DIR$/Anim/Anim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Holo Festival/Holo Festival.iml" filepath="$PROJECT_DIR$/Holo Festival/Holo Festival.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Holo VIP/Holo VIP.iml" filepath="$PROJECT_DIR$/Holo VIP/Holo VIP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tree/Tree.iml" filepath="$PROJECT_DIR$/Tree/Tree.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZHY.iml" filepath="$PROJECT_DIR$/ZHY.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/zlib/zlib.iml" filepath="$PROJECT_DIR$/zlib/zlib.iml" />

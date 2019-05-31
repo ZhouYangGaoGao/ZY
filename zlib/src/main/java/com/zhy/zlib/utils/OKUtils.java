@@ -30,7 +30,7 @@ import okhttp3.Response;
  * Created by YangYang on 2017/7/27.
  */
 
-public class OKUtils {
+public class OKUtils<T> {
     private static OkHttpClient okHttpClient;
     /**
      * @param url      请求地址
@@ -80,6 +80,21 @@ public class OKUtils {
         result(Tag, listener, request);
     }
 
+    /**
+     * @param url      请求地址
+     * @param Tag      请求标记,
+     * @param listener 回调
+     * @param strs     请求参数
+     */
+    public static void postJson(String url, final String Tag, String json,final CommonListener listener, String... strs) {
+        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
+        Request.Builder b = new Request.Builder();
+        b.header("Content-Type", "application/json");
+        LogUtils.e(Tag,json);
+        Request request = b.url(url).tag(Tag).post(body).build();
+        result(Tag, listener, request);
+    }
+
     private static void result(final String Tag, final CommonListener listener, Request request) {
         Call call = getInstance().newCall(request);
         final Handler handler = new Handler(Looper.getMainLooper());
@@ -102,12 +117,13 @@ public class OKUtils {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        LogUtils.i(str);
                         try {
                             if (!str.equals("")) {
                                 JSONObject object = new JSONObject(str);
                                 // 请求成功
-                                if (str.contains("code") &&
-                                        object.optInt("code", 0) == 200) {
+                                if (str.contains("errorCode") &&
+                                        object.optString("errorCode").equals("00")) {
                                     LogUtils.e("===结果onSuccess===" + Tag, str);
                                     listener.onSuccess(Tag, str);
                                     // 请求失败
@@ -121,7 +137,8 @@ public class OKUtils {
                             }
                             listener.onFinish(Tag,str);
                         } catch (Exception e) {
-
+                            e.printStackTrace();
+                            LogUtils.e("===结果onFailure===" + Tag, e == null ? "请求失败" : e.toString());
                         }
                     }
                 });

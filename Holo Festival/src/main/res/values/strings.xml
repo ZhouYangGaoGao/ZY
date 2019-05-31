@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Holo Festival</string>
+    <string name="str_ok">确定</string>
+    <string name="str_pay">去结账</string>
+    <string name="str_your_oder">本次消费</string>
+    <string name="str_order_num">订单号</string>
+    <string name="str_ring_pay">手环支付</string>
+    <string name="str_amount">总价</string>
+    <string name="str_incom">收支明细</string>
+</resources>

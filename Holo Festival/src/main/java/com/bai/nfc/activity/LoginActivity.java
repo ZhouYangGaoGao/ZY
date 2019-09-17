@@ -25,7 +25,6 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-
     @BindView(R.id.et_merchantid)
     EditText etMerchantid;
     @BindView(R.id.et_password)

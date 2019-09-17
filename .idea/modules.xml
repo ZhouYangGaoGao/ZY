@@ -8,7 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/Tree/Tree.iml" filepath="$PROJECT_DIR$/Tree/Tree.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZHY.iml" filepath="$PROJECT_DIR$/ZHY.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/forest/forest.iml" filepath="$PROJECT_DIR$/forest/forest.iml" />
       <module fileurl="file://$PROJECT_DIR$/zlib/zlib.iml" filepath="$PROJECT_DIR$/zlib/zlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxing/zxing.iml" filepath="$PROJECT_DIR$/zxing/zxing.iml" />
     </modules>
   </component>
 </project>

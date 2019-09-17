@@ -1,16 +1,8 @@
 package com.bai.nfc.activity;
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,9 +17,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-import com.smartdevice.aidl.IZKCService;
-import com.zhy.zlib.utils.LogUtils;
 
 public class PayActivity extends ExtentScreenBaseActivity {
     @BindView(R.id.lv_goods)
@@ -94,7 +83,7 @@ public class PayActivity extends ExtentScreenBaseActivity {
                                     " H    数量:" + listBean.getSelectCount(),
                             0, y, 480, 30, 30, TextStyle.GUI_COLOR_WHITE, TextStyle.GUI_ALIGN_CENTER);
                 }
-                mIzkcService.showString(tvAmount.getText().toString() + " 将手环靠近左侧支付",
+                mIzkcService.showString(tvAmount.getText().toString() + " 请出示付款吗",
                         0, 240, 480, 30, 30, TextStyle.GUI_COLOR_WHITE, TextStyle.GUI_ALIGN_CENTER);
             } catch (Exception e) {
                 e.printStackTrace();

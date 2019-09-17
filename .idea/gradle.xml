@@ -13,7 +13,9 @@
             <option value="$PROJECT_DIR$/Holo VIP" />
             <option value="$PROJECT_DIR$/Tree" />
             <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/forest" />
             <option value="$PROJECT_DIR$/zlib" />
+            <option value="$PROJECT_DIR$/zxing" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

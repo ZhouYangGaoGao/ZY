@@ -228,3 +228,26 @@
 		……
 		]
 	  }
+
+客户消费Holo币接口
+接口：consumHoloCoin.do
+入参：{
+  "merchantId":"",//商户ID
+  "customerId":"",//客户ID
+  "techarge":{
+    "subject":"",//订单名称
+    "body":"",//商品描述
+    "spbillCreateIp":"",//发起人IP地址
+    "payType":"",//支付类型（4代表客户扫码，5代表扫客户的付款吗）
+    "payWay":"",//支付方式(1代表微信，2代表支付宝)
+    "auth_code":""//授权码，扫客户付款码时传
+   }
+  "buyJournals":[{
+   "goodsId":"",//商品ID
+   "quantity":""//购买数量
+   "price"：//价格，选填
+
+  }
+    ……
+  ]
+   }

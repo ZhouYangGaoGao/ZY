@@ -35,16 +35,26 @@
             android:layout_weight="1"
             android:textSize="30sp"
             android:textColor="@color/colorWhite"
-            android:text="总价: 0 H" />
+            android:text="总价: 0" />
 
         <TextView
-            android:id="@+id/tv_next"
+            android:id="@+id/tv_WX"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/result_points"
+            android:gravity="center"
+            android:text="微信"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp" />
+        <TextView
+            android:id="@+id/tv_ZFB"
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@color/colorBlue"
             android:gravity="center"
-            android:text="@string/str_ring_pay"
+            android:text="支付宝"
             android:textColor="@color/colorWhite"
             android:textSize="30sp" />
 

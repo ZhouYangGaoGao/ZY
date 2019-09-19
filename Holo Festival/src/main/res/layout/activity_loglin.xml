@@ -19,7 +19,7 @@
             android:id="@+id/et_merchantid"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:text="holohk"
+            android:text="18701646700"
             android:hint="请输入商户账号" />
 
         <EditText
@@ -28,7 +28,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:hint="请输入商户密码"
-            android:text="123456"
+            android:text="123"
             android:inputType="numberPassword" />
 
 

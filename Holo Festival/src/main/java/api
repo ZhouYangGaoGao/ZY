@@ -229,6 +229,23 @@
 		]
 	  }
 
+
+
+客户消费Holo币接口
+接口：consumHoloCoin.do
+入参：{
+		"merchantId":"",//商户ID
+		"customerId":"",//客户ID
+		"buyJournals":[{
+			"goodsId":"",//商品ID
+			"quantity":""//购买数量
+			"price"：//价格，选填
+
+		}
+		……
+		]
+	  }
+
 客户消费Holo币接口
 接口：consumHoloCoin.do
 入参：{

@@ -3,6 +3,10 @@
     package="com.bai.nfc">
 
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -67,6 +71,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.RingOrderDscActivity" />
         <activity android:name=".activity.GatheringActivity" />
+        <activity android:name=".activity.CodeActivity" />
+        <activity android:name=".zbar.CaptureActivity" />
+
         <service
             android:name=".service.ScreenService"
             android:enabled="true"

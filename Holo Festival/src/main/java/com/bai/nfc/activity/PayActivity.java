@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PayActivity extends ExtentScreenBaseActivity {
@@ -23,8 +24,10 @@ public class PayActivity extends ExtentScreenBaseActivity {
     ListView lvGoods;
     @BindView(R.id.tv_amount)
     TextView tvAmount;
-    @BindView(R.id.tv_next)
-    TextView tvNext;
+    @BindView(R.id.tv_WX)
+    TextView tvWX;
+    @BindView(R.id.tv_ZFB)
+    TextView tvZFB;
 
     double amount = 0;
     List<GoodsList.PageInfoBean.ListBean> datas = new ArrayList<>();
@@ -54,15 +57,6 @@ public class PayActivity extends ExtentScreenBaseActivity {
                     h.setText(R.id.tv_price, "单价:" + i.getCustomizationPrice() / 100d + " H    共 " + i.getSelectCount() * i.getCustomizationPrice() / 100d + " H");
             }
         });
-
-
-    }
-
-    @OnClick(R.id.tv_next)
-    public void onViewClicked() {
-        startActivityForResult(new Intent(this, BalanceActivity.class).putExtra("payAmount", amount)
-                .putExtra("type", BalanceActivity.PAY), BalanceActivity.PAY);
-        finish();
     }
 
     @Override
@@ -88,5 +82,22 @@ public class PayActivity extends ExtentScreenBaseActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+    }
+
+
+    @OnClick({R.id.tv_WX, R.id.tv_ZFB})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_WX:
+                startActivityForResult(new Intent(this, CodeActivity.class).putExtra("payAmount", amount)
+                        .putExtra("payWay", "1"), BalanceActivity.PAY);
+                finish();
+                break;
+            case R.id.tv_ZFB:
+                startActivityForResult(new Intent(this, CodeActivity.class).putExtra("payAmount", amount)
+                        .putExtra("payWay", "2"), BalanceActivity.PAY);
+                finish();
+                break;
+        }
     }
 }

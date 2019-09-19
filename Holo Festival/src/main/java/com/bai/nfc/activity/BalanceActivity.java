@@ -208,7 +208,7 @@ public class BalanceActivity extends NFCBaseActivity {
 
                                 } else if (!isOnOnPaying) {
                                     List<GoodsList.PageInfoBean.ListBean> temp = Hawk.get("selecetGoods");
-                                    RequestUtil.consumHoloConin(ring.getCustomer().getCustomerId(), temp, this);
+//                                    RequestUtil.consumHoloConin(ring.getCustomer().getCustomerId(), temp, this);
                                     isOnOnPaying = true;
                                 }
                             }

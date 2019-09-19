@@ -24,6 +24,7 @@ public class Constant {
     public static String CONSUMPTION_ID = "consumptionId";//订单流水 id
     public static String BUY_JOURNAL_ID = "buyJournalId";//订单流水 id
     public static String BUY_JOURNALs = "buyJournals";//订单流水 id
+    public static String TECHARGE = "techarge";//
     public static String CLASSIFY_ID = "classifyId";//类型 Id
 
 }

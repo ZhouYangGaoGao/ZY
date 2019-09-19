@@ -1,5 +1,7 @@
 package com.bai.nfc.util;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.bai.nfc.bean.GoodsList;
 import com.bai.nfc.bean.OrderDsc;
@@ -78,10 +80,10 @@ public class RequestUtil {
     /**
      * 消费 Holo币
      *
-     * @param customerId 客户 id
-     * @param listener   回调
+     * @param spbillCreateIp 本机地址
+     * @param listener       回调
      */
-    public static void consumHoloConin(String customerId,
+    public static void consumHoloConin(String spbillCreateIp, String payType, String payWay, String auth_code,
                                        List<GoodsList.PageInfoBean.ListBean> goods, CommonListener listener) {
         List<Map<String, Object>> buyJournals = new ArrayList<>();
 
@@ -95,9 +97,18 @@ public class RequestUtil {
             }
             buyJournals.add(one);
         }
+        Map techarge = new HashMap<String, Object>();
+        techarge.put("subject", Hawk.get(Constant.MERCHAN_ID));
+        techarge.put("body", buyJournals.get(0).get(Constant.GOODS_NAME) + " 等");
+        techarge.put("spbillCreateIp", spbillCreateIp);
+        techarge.put("payType", payType);
+        techarge.put("payWay", payWay);
+        if (payType.equals("5") && !TextUtils.isEmpty(auth_code))
+            techarge.put("auth_code", auth_code);
+
         Map map = new HashMap();
-        map.put(Constant.COUSTOMER_ID, customerId);
         map.put(Constant.MERCHAN_ID, Hawk.get(Constant.MERCHAN_ID));
+        map.put(Constant.TECHARGE, techarge);
         map.put(Constant.BUY_JOURNALs, buyJournals);
         OKUtils.postJson(Urls.consumHoloConin, Urls.consumHoloConin, JSON.toJSONString(map), listener);
     }

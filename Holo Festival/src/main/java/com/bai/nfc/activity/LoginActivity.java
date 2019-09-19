@@ -32,11 +32,11 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.but_login)
     Button butLogin;
 
-//    String merchantId = "18701646700";
-//    String password = "123456";
+    String merchantId = "18701646700";
+    String password = "123";
 
-    String merchantId;
-    String password;
+//    String merchantId;
+//    String password;
 
     @Override
     public View contentView(Bundle savedInstanceState) {

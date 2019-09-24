@@ -268,3 +268,13 @@
     ……
   ]
    }
+
+   获取订单信息接口
+   接口：getTecharge.do
+   入参：String outTradeNo
+   出参：{
+     "errorCode":"",
+     "errorMsg":"",
+     "code":"",//0代表未回调，1代表已回调
+
+      }

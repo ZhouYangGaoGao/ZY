@@ -1,10 +1,11 @@
 package com.bai.nfc.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -13,11 +14,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.bai.nfc.R;
+import com.bai.nfc.bean.Code;
 import com.bai.nfc.bean.GoodsList;
+import com.bai.nfc.fragment.GoodsFragment;
+import com.bai.nfc.util.CodeUtil;
 import com.bai.nfc.util.RequestUtil;
+import com.bai.nfc.util.Urls;
 import com.bai.nfc.zbar.CaptureActivity;
 import com.orhanobut.hawk.Hawk;
+import com.zhy.zlib.listener.TopListener;
+import com.zhy.zlib.view.TopBar;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -25,18 +34,21 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CodeActivity extends BaseActivity {
+public class CodeActivity extends ExtentScreenBaseActivity {
     @BindView(R.id.code)
-    ImageView code;
+    ImageView mCode;
     @BindView(R.id.scan)
     TextView scan;
+    @BindView(R.id.topBar)
+    TopBar topBar;
     private static final int REQUEST_CODE_SCAN = 0x0000;// 扫描二维码
-    private String payWay = "1";
+    private int payWay = 1;
 
     @Override
     public View contentView(Bundle savedInstanceState) {
@@ -45,22 +57,72 @@ public class CodeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        payWay = intentString("payWay");
+        payWay = intentInt("payWay");
+        //获取二维码
+        List<GoodsList.PageInfoBean.ListBean> temp = Hawk.get("selecetGoods");
+        RequestUtil.consumHoloConin(getIP(), 4, payWay, null, temp, CodeActivity.this);
     }
 
     @Override
     public void onSuccess(String Tag, String value) {
-//        switch ()
+        switch (Tag) {
+            case Urls.consumHoloConin:
+                final Code code = JSON.parseObject(value, Code.class);
+                if (code != null && code.getResult() != null) {
+                    if (code.getResult().getData() != null) {
+                        Bitmap qrImage = CodeUtil.createQRImage(code.getResult().getData(), 260, 260);
+                        topBar.mRightText.setText("等待支付中");
+                        topBar.mRightText.setEnabled(false);
+                        mCode.setImageBitmap(qrImage);
+                        if (mIzkcService != null)
+                            try {
+//                                mIzkcService.showGrayImage(qrImage,110,5,260,260,0,1);
+                                mIzkcService.showQrCode(code.getResult().getData(),260,110,5);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        if (timer == null) {
+                            timer = new Timer();
+                        }
+                        timerTask = new TimerTask() {
+
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        RequestUtil.getTecharge(code.getOutTradeNo(), CodeActivity.this);
+                                    }
+                                });
+                            }
+                        };
+                        timer.schedule(timerTask, 5000, 5000);
+                    } else if (code.getResult().getCode() == 400) {
+                        topBar.mRightText.setText("支付成功");
+                        showToast("支付成功");
+                        GoodsFragment.needRefresh = true;
+                        finish();
+                    } else {
+                        showToast(code.getResult().getMessage());
+                    }
+                }
+                break;
+            case Urls.getTecharge:
+                JSONObject jsonObject = JSONObject.parseObject(value);
+                if ("1".equals(jsonObject.getString("code"))) {
+                    showToast("支付成功");
+                    GoodsFragment.needRefresh = true;
+                    finish();
+                }
+                break;
+        }
     }
 
-    @OnClick(R.id.scan)
-    public void onViewClicked() {
-        //动态权限申请
-        if (ContextCompat.checkSelfPermission(CodeActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(CodeActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
-        } else {
-            goScan();
-        }
+    @Override
+    protected void onDestroy() {
+        cleanScreen();
+        cancelTimer();
+        super.onDestroy();
     }
 
     /**
@@ -97,7 +159,7 @@ public class CodeActivity extends BaseActivity {
                         Bundle bundle = data.getExtras();
                         String result = bundle.getString(CaptureActivity.EXTRA_STRING);
                         List<GoodsList.PageInfoBean.ListBean> temp = Hawk.get("selecetGoods");
-                        RequestUtil.consumHoloConin(getIP(), "5", payWay, result, temp, this);
+                        RequestUtil.consumHoloConin(getIP(), 5, payWay, result, temp, this);
                         scan.setText("扫描结果：" + result);
                     }
                 }
@@ -122,5 +184,38 @@ public class CodeActivity extends BaseActivity {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    @OnClick({R.id.code, R.id.scan})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.code:
+
+                break;
+            case R.id.scan:
+                //动态权限申请
+                if (ContextCompat.checkSelfPermission(CodeActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(CodeActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+                } else {
+                    goScan();
+                }
+                break;
+        }
+    }
+
+    private Timer timer;
+    private TimerTask timerTask;
+    private int retime = 0;
+
+    public void cancelTimer() {
+        if (timerTask != null) {
+            timerTask.cancel();
+            timerTask = null;
+        }
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
     }
 }

@@ -106,7 +106,7 @@ public class OKUtils<T> {
                     public void run() {
                         listener.onFailure(Tag, e.getMessage());
                         listener.onFinish(Tag,e.getMessage());
-                        LogUtils.e("===结果onFailure===" + Tag, e == null ? "请求失败" : e.toString());
+                        LogUtils.e("=onFailure=" + Tag, e == null ? "请求失败" : e.toString());
                     }
                 });
             }
@@ -124,21 +124,20 @@ public class OKUtils<T> {
                                 // 请求成功
                                 if (str.contains("errorCode") &&
                                         object.optString("errorCode").equals("00")) {
-                                    LogUtils.e("===结果onSuccess===" + Tag, str);
+                                    LogUtils.e("=onSuccess=" + Tag, str);
                                     listener.onSuccess(Tag, str);
                                     // 请求失败
                                 } else if (str.contains("code")){
-                                    LogUtils.e("===结果onException===" + Tag, str);
+                                    LogUtils.e("=onException=" + Tag, str);
                                     listener.onException(Tag, str);
                                 }else {
                                     listener.onException(Tag,str);
                                 }
-
                             }
                             listener.onFinish(Tag,str);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            LogUtils.e("===结果onFailure===" + Tag, e == null ? "请求失败" : e.toString());
+                            LogUtils.e("=onFailure=" + Tag, e == null ? "请求失败" : e.toString());
                         }
                     }
                 });

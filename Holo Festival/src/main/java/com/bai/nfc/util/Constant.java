@@ -4,11 +4,6 @@ public class Constant {
 
     public static String TEST_RING_ID = "854821f779c1d";
 
-
-
-
-
-
     public static String MERCHAN_ID = "merchantId";//商户id
     public static String PASSWORD = "password";//商户密码
     public static String GOODS_NAME = "goodsName";//商品名称

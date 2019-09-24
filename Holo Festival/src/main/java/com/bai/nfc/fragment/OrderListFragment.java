@@ -29,18 +29,21 @@ public class OrderListFragment extends ListFragment {
             @Override
             public void convert(ViewHolder h, final NewOrderList.PageInfoBean.ListBean i) {
                 h.setText(R.id.tv_amount, i.getConsumptionAmount() / 100d + " H");
-                h.setText(R.id.tv_id, "订单号:" + i.getConsumptionId().substring(0, 10));
-//                h.setText(R.id.tv_time, i.getConsumptionTime());
-                h.setText(R.id.tv_time, DateUtil.milliString2String(i.getConsumptionTime(),DateUtil.MINUTE_PATTERN));
-
+                h.setText(R.id.tv_id, i.getBody());
+//                h.setText(R.id.tv_id, "订单号:" + i.getConsumptionId().substring(0, 10));
+//                h.setText(R.id.tv_time, DateUtil.milliString2String(i.getConsumptionTime(), DateUtil.MINUTE_PATTERN) + (i.getPayType() == 5 ? " 扫客" : " 扫商"));
+                h.setText(R.id.tv_time, DateUtil.milliString2String(i.getConsumptionTime(), "MM-dd HH:mm"));
+                if (i.getPayWay() == 1) {
+                    h.getConvertView().setBackgroundResource(R.color.result_points);
+                } else h.getConvertView().setBackgroundResource(R.color.colorBlue);
                 h.setClick(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getActivity(), RingOrderDscActivity.class)
                                 .putExtra(Constant.CONSUMPTION_ID, i.getConsumptionId())
-                                .putExtra("type", "dsc")
+//                                .putExtra("type", "dsc")
                                 .putExtra(Constant.COUSTOMER_ID, getActivity().getIntent().getStringExtra(Constant.COUSTOMER_ID))
-                                .putExtra("time", DateUtil.milliString2String(i.getConsumptionTime(),DateUtil.MINUTE_PATTERN)));
+                                .putExtra("time", DateUtil.milliString2String(i.getConsumptionTime(), DateUtil.MINUTE_PATTERN)));
                     }
                 });
             }
@@ -56,7 +59,7 @@ public class OrderListFragment extends ListFragment {
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page=1;
+        page = 1;
         datas.clear();
         upData();
         getData();
@@ -77,7 +80,7 @@ public class OrderListFragment extends ListFragment {
     @Override
     public void onSuccess(String Tag, String value) {
         NewOrderList orders = JSON.parseObject(value, NewOrderList.class);
-        if (orders != null && orders.getPageInfo() != null&&orders.getPageInfo().getList()!=null) {
+        if (orders != null && orders.getPageInfo() != null && orders.getPageInfo().getList() != null) {
             datas.addAll(orders.getPageInfo().getList());
             upData();
         }

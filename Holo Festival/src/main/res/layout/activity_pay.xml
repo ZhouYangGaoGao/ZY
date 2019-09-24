@@ -29,11 +29,12 @@
 
         <TextView
             android:id="@+id/tv_amount"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:gravity="center"
             android:layout_height="70dp"
-            android:layout_weight="1"
             android:textSize="30sp"
+            android:paddingRight="12dp"
+            android:paddingLeft="12dp"
             android:textColor="@color/colorWhite"
             android:text="总价: 0" />
 

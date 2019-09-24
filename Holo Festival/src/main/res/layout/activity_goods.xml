@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         app:CT="点单"
         app:LT="返回"
-        app:isFinish="true"
-        app:RT="@string/str_balance" />
+        app:isFinish="true" />
 
     <ListView
         android:id="@+id/lv_type"

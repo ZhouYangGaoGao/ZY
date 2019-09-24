@@ -13,4 +13,5 @@ public class Urls {
     public final static String queryOrderByMIdAndHId = IP + "queryOrderByMIdAndHId.do";//根据商户ID和手环ID查询订单
     public final static String refundHoloCoin = IP + "refundHoloCoin.do";//给客户退Holo币
     public final static String getDetailed = IP + "getDetailed.do";//收支明细
+    public final static String getTecharge = IP + "getTecharge.do";//获取订单是否支付成功
 }

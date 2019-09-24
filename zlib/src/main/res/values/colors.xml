@@ -7,7 +7,7 @@
     <color name="colorTheme">#88888888</color>
 
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlue">#5B5EE4</color>
+    <color name="colorBlue">#0B9BE2</color>
     <color name="colorRed">#C52A35</color>
     <color name="colorYellow">#FFD800</color>
     <color name="colorLightRed">#D2433F</color>
@@ -36,7 +36,7 @@
     <color name="encode_view">#ffffff</color>
     <color name="possible_result_points">#ffbd21</color>
     <color name="result_minor_text">#c0c0c0</color>
-    <color name="result_points">#99cc00</color>
+    <color name="result_points">#00C70C</color>
     <color name="result_text">#ffffff</color>
     <color name="result_view">#000000</color>
     <color name="status_text">#ffffff</color>

@@ -1,7 +1,6 @@
 package com.bai.nfc.activity;
 
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +9,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.bai.nfc.bean.GoodsList;
-import com.bai.nfc.util.TextStyle;
 import com.smartdevice.aidl.IZKCService;
 
 public abstract class ExtentScreenBaseActivity extends BaseActivity {
@@ -73,11 +70,12 @@ public abstract class ExtentScreenBaseActivity extends BaseActivity {
         super.onResume();
     }
 
-    @Override
-    protected void onDestroy() {
-        unbindService();
-        super.onDestroy();
-    }
+//    @Override
+//    protected void onDestroy() {
+//        cleanScreen();
+//        unbindService();
+//        super.onDestroy();
+//    }
 
     public void onServiceConnected() {
 
@@ -87,7 +85,6 @@ public abstract class ExtentScreenBaseActivity extends BaseActivity {
         try {
             if (mIzkcService != null)
                 mIzkcService.showCleanAllScreen();
-//            mIzkcService.showFillColor(0, 0, 480, 320, "#000000");
         } catch (RemoteException e) {
             e.printStackTrace();
         }

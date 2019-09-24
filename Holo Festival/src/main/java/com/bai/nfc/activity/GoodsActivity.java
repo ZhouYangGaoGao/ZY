@@ -50,24 +50,21 @@ public class GoodsActivity extends BaseActivity {
         fgHome = (GoodsFragment) getSupportFragmentManager().findFragmentById(R.id.fg_home);
         RequestUtil.classifyList((String) Hawk.get(Constant.MERCHAN_ID), this);
 
-
         fgHome.setOnPriceChangeListener(new ClickListener() {
             @Override
             public void onChange(Object arg) {
                 double price = (double) arg;
-                tvAmount.setText("总价格: " + price / 100 + " H");
+                tvAmount.setText("总价: " + price / 100 + " H");
             }
         });
-
 
         topbar.setOnTopListener(new TopListener() {
             @Override
             public void rTClick() {
-                startActivity(new Intent(GoodsActivity.this, BalanceActivity.class).putExtra("type",0));
+//                startActivity(new Intent(GoodsActivity.this, BalanceActivity.class).putExtra("type",0));
             }
         });
     }
-
 
     @OnClick(R.id.tv_next)
     public void onViewClicked() {

@@ -77,16 +77,23 @@ public class RequestUtil {
         OKUtils.postJson(Urls.check_HandRing, Urls.check_HandRing, JSON.toJSONString(map), listener);
     }
 
+
+    public static void getTecharge(String outTradeNo, CommonListener listener) {
+        Map map = new HashMap();
+        map.put("outTradeNo", outTradeNo);
+        OKUtils.postJson(Urls.getTecharge, Urls.getTecharge, JSON.toJSONString(map), listener);
+    }
+
     /**
      * 消费 Holo币
      *
      * @param spbillCreateIp 本机地址
      * @param listener       回调
      */
-    public static void consumHoloConin(String spbillCreateIp, String payType, String payWay, String auth_code,
+    public static void consumHoloConin(String spbillCreateIp, int payType, int payWay, String auth_code,
                                        List<GoodsList.PageInfoBean.ListBean> goods, CommonListener listener) {
         List<Map<String, Object>> buyJournals = new ArrayList<>();
-
+        String body = "";
         for (int i = 0; i < goods.size(); i++) {
             Map one = new HashMap();
             GoodsList.PageInfoBean.ListBean good = goods.get(i);
@@ -96,14 +103,16 @@ public class RequestUtil {
                 one.put(Constant.PRICE, good.getCustomizationPrice());
             }
             buyJournals.add(one);
+            if (i < 3)
+                body = body + " " + goods.get(i).getGoodsName() + " x " + goods.get(i).getSelectCount();
         }
         Map techarge = new HashMap<String, Object>();
         techarge.put("subject", Hawk.get(Constant.MERCHAN_ID));
-        techarge.put("body", buyJournals.get(0).get(Constant.GOODS_NAME) + " 等");
+        techarge.put("body", body);
         techarge.put("spbillCreateIp", spbillCreateIp);
         techarge.put("payType", payType);
         techarge.put("payWay", payWay);
-        if (payType.equals("5") && !TextUtils.isEmpty(auth_code))
+        if (payType == 5 && !TextUtils.isEmpty(auth_code))
             techarge.put("auth_code", auth_code);
 
         Map map = new HashMap();
@@ -192,7 +201,7 @@ public class RequestUtil {
 
         Map map = new HashMap();
         map.put(Constant.MERCHAN_ID, Hawk.get(Constant.MERCHAN_ID));
-        map.put(Constant.COUSTOMER_ID, customerId);
+//        map.put(Constant.COUSTOMER_ID, customerId);
         map.put(Constant.CONSUMPTION_ID, goods.get(0).getConsumptionId());
         map.put(Constant.BUY_JOURNALs, buyJournals);
         OKUtils.postJson(Urls.refundHoloCoin, Urls.refundHoloCoin, JSON.toJSONString(map), listener);

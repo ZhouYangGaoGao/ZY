@@ -5,11 +5,9 @@ import android.view.View;
 
 import com.bai.nfc.R;
 import com.bai.nfc.activity.BalanceActivity;
-import com.bai.nfc.activity.GatheringActivity;
 import com.bai.nfc.activity.GoodsActivity;
 import com.bai.nfc.activity.LoginActivity;
 import com.bai.nfc.activity.OrderActivity;
-import com.bai.nfc.activity.RefunListActicvity;
 import com.bai.nfc.util.Constant;
 import com.orhanobut.hawk.Hawk;
 import com.zhy.zlib.Base.ListFragment;
@@ -36,16 +34,16 @@ public class HomeFragment extends ListFragment {
                             case 0:
                                 startActivity(new Intent(getContext(), GoodsActivity.class));
                                 break;
+//                            case 1:
+//                                startActivity(new Intent(getContext(), BalanceActivity.class).putExtra("type", 2));
+//                                break;
                             case 1:
-                                startActivity(new Intent(getContext(), BalanceActivity.class).putExtra("type", 2));
-                                break;
-                            case 2:
                                 startActivity(new Intent(getContext(), OrderActivity.class));
                                 break;
-                            case 3:
-                                startActivity(new Intent(getContext(), BalanceActivity.class).putExtra("type", 0));
-                                break;
-                            case 4:
+//                            case 3:
+//                                startActivity(new Intent(getContext(), BalanceActivity.class).putExtra("type", 0));
+//                                break;
+                            case 2:
 //                                startActivity(new Intent(getContext(), GatheringActivity.class));
                                 DialogUtils.showDoubleBtnDialog(getActivity(), "退出登录", "您确定退出登录吗?", new ClickListener() {
                                     @Override
@@ -55,8 +53,6 @@ public class HomeFragment extends ListFragment {
                                     }
                                 });
                                 break;
-
-
                         }
                     }
                 });
@@ -69,10 +65,10 @@ public class HomeFragment extends ListFragment {
     public void initViewData() {
         topbar.mCenterText.setText("菜单");
         datas.add("点单");
-        datas.add("退货");
+//        datas.add("退货");
         datas.add("收支明细");
-        datas.add("手环余额查询");
         datas.add("退出登录");
+//        datas.add("手环余额查询");
         refresh.setEnableRefresh(false);
         refresh.setEnableLoadMore(false);
         upData();

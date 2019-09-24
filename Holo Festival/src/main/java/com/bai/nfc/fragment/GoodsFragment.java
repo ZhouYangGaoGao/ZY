@@ -34,7 +34,6 @@ public class GoodsFragment extends ListFragment {
             @Override
             public void convert(final ViewHolder h, final GoodsList.PageInfoBean.ListBean i) {
                 h.setText(R.id.tv_name, i.getGoodsName());
-                LogUtils.e("goodsPrice=", i.getGoodsPrice() + "");
                 h.getView(R.id.tv_price).setClickable(false);
                 if (i.getGoodsPrice() > 0)
                     h.setText(R.id.tv_price, i.getGoodsPrice() / 100d + " H");
@@ -56,8 +55,6 @@ public class GoodsFragment extends ListFragment {
                                     int price = (int) arg;
                                     h.setText(R.id.tv_price, price / 100d + " H");
                                     datas.get(h.getmPosition()).setCustomizationPrice(price);
-                                    LogUtils.e("getmPosition==", h.getmPosition() + "");
-                                    LogUtils.e("getCustomizationPrice==", datas.get(h.getmPosition()).getCustomizationPrice() + "");
                                 }
                             });
                         }
@@ -70,7 +67,6 @@ public class GoodsFragment extends ListFragment {
 
                         if (i.getGoodsPrice() == -1 && i.getCustomizationPrice() == 0)
                             return;
-
                         datas.get(h.getmPosition()).setSelectCount(i.getSelectCount() + 1);
                         if (i.getGoodsPrice() == -1) {
                             amount += i.getCustomizationPrice();

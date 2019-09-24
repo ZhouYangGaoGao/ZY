@@ -34,7 +34,6 @@ public class LoginActivity extends BaseActivity {
 
     String merchantId = "18701646700";
     String password = "123";
-
 //    String merchantId;
 //    String password;
 
@@ -61,7 +60,6 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, "请正确输入商户名和密码", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private boolean loginCheck() {
         merchantId = etMerchantid.getText().toString().trim();

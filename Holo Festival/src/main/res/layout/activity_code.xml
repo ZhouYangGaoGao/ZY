@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
+
+    <com.zhy.zlib.view.TopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:CT="收款"
+        app:LT="返回"
+        app:RT="二维码获取中"
+        app:isFinish="true" />
 
     <ImageView
         android:id="@+id/code"
-        android:layout_width="200dp"
-        android:background="@color/colorTheme"
-        android:layout_height="200dp" />
-    <TextView
         android:layout_width="match_parent"
-        android:text="扫描二维码"
-        android:gravity="center"
-        android:id="@+id/scan"
-        android:layout_marginTop="50dp"
-        android:background="@color/c_ffa3a3a3"
-        android:layout_height="50dp" />
+        android:layout_height="360dp"
+        android:layout_below="@+id/topBar"
+        android:background="@color/colorTheme" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/scan"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="50dp"
+        android:background="#2B2B2B"
+        android:gravity="center"
+        android:text="扫描二维码"
+        android:textColor="@color/colorWhite" />
+
+</RelativeLayout>

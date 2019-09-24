@@ -236,8 +236,35 @@ public class NewOrderList {
             private String customerId;
             private String phoneNumber;
             private int consumptionAmount;
+            private int payType;
+            private int payWay;
             private String merchantId;
+            private String body;
             private String consumptionTime;
+
+            public String getBody() {
+                return body;
+            }
+
+            public void setBody(String body) {
+                this.body = body;
+            }
+
+            public int getPayType() {
+                return payType;
+            }
+
+            public void setPayType(int payType) {
+                this.payType = payType;
+            }
+
+            public int getPayWay() {
+                return payWay;
+            }
+
+            public void setPayWay(int payWay) {
+                this.payWay = payWay;
+            }
 
             public String getConsumptionId() {
                 return consumptionId;

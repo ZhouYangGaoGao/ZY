@@ -77,27 +77,33 @@ public class PayActivity extends ExtentScreenBaseActivity {
                                     " H    数量:" + listBean.getSelectCount(),
                             0, y, 480, 30, 30, TextStyle.GUI_COLOR_WHITE, TextStyle.GUI_ALIGN_CENTER);
                 }
-                mIzkcService.showString(tvAmount.getText().toString() + " 请出示付款吗",
-                        0, 240, 480, 30, 30, TextStyle.GUI_COLOR_WHITE, TextStyle.GUI_ALIGN_CENTER);
+                mIzkcService.showString(tvAmount.getText().toString() + "出示付款码或扫描二维码付款",
+                        0, 240, 480, 30, 25, TextStyle.GUI_COLOR_WHITE, TextStyle.GUI_ALIGN_CENTER);
             } catch (Exception e) {
                 e.printStackTrace();
             }
     }
-
 
     @OnClick({R.id.tv_WX, R.id.tv_ZFB})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_WX:
                 startActivityForResult(new Intent(this, CodeActivity.class).putExtra("payAmount", amount)
-                        .putExtra("payWay", "1"), BalanceActivity.PAY);
+                        .putExtra("payWay", 1), BalanceActivity.PAY);
                 finish();
                 break;
             case R.id.tv_ZFB:
                 startActivityForResult(new Intent(this, CodeActivity.class).putExtra("payAmount", amount)
-                        .putExtra("payWay", "2"), BalanceActivity.PAY);
+                        .putExtra("payWay", 2), BalanceActivity.PAY);
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        cleanScreen();
+        unbindService();
+        super.onDestroy();
     }
 }

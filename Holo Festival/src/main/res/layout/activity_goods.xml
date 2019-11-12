@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:textSize="30sp"
             android:textColor="@color/colorWhite"
-            android:text="总价: 0 H" />
+            android:text="总价: 0 ¥" />
 
         <TextView
             android:id="@+id/tv_next"

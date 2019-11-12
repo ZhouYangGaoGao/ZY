@@ -84,6 +84,12 @@ public class RequestUtil {
         OKUtils.postJson(Urls.getTecharge, Urls.getTecharge, JSON.toJSONString(map), listener);
     }
 
+    public static void getPayMent(String outTradeNo, CommonListener listener) {
+        Map map = new HashMap();
+        map.put("outTradeNo", outTradeNo);
+        OKUtils.postJson(Urls.getPayMent, Urls.getPayMent, JSON.toJSONString(map), listener);
+    }
+
     /**
      * 消费 Holo币
      *

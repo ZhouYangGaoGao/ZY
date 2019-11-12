@@ -36,12 +36,12 @@ public class GoodsFragment extends ListFragment {
                 h.setText(R.id.tv_name, i.getGoodsName());
                 h.getView(R.id.tv_price).setClickable(false);
                 if (i.getGoodsPrice() > 0)
-                    h.setText(R.id.tv_price, i.getGoodsPrice() / 100d + " H");
+                    h.setText(R.id.tv_price, i.getGoodsPrice() / 100d + " ¥");
                 else {
                     TextView tvPrice = h.getView(R.id.tv_price);
                     tvPrice.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
                     if (i.getCustomizationPrice() != 0) {
-                        h.setText(R.id.tv_price, i.getCustomizationPrice() / 100d + " H");
+                        h.setText(R.id.tv_price, i.getCustomizationPrice() / 100d + " ¥");
                     } else {
                         h.setText(R.id.tv_price, "点击编辑");
                     }
@@ -49,11 +49,11 @@ public class GoodsFragment extends ListFragment {
                     h.setClick(R.id.tv_price, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            DialogUtils.showEditeDialog(getActivity(), "编辑价格", "RMB-HOLO 6.6:1", "确定", new ClickListener() {
+                            DialogUtils.showEditeDialog(getActivity(), "编辑价格", "请输入可变价格", "确定", new ClickListener() {
                                 @Override
                                 public void onChange(Object arg) {
                                     int price = (int) arg;
-                                    h.setText(R.id.tv_price, price / 100d + " H");
+                                    h.setText(R.id.tv_price, price / 100d + " ¥");
                                     datas.get(h.getmPosition()).setCustomizationPrice(price);
                                 }
                             });

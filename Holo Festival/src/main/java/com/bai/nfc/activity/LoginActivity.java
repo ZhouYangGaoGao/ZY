@@ -8,17 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.bai.nfc.R;
-import com.bai.nfc.fragment.HomeFragment;
 import com.bai.nfc.util.Constant;
 import com.bai.nfc.util.RequestUtil;
-import com.bai.nfc.util.Urls;
 import com.orhanobut.hawk.Hawk;
-import com.zhy.zlib.utils.OKUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,10 +25,10 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.but_login)
     Button butLogin;
 
-    String merchantId = "18701646700";
-    String password = "123";
-//    String merchantId;
-//    String password;
+//    String merchantId = "18701646700";
+//    String password = "123";
+    String merchantId;
+    String password;
 
     @Override
     public View contentView(Bundle savedInstanceState) {

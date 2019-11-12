@@ -26,7 +26,7 @@ public class RefunListFragment extends ListFragment {
         return new CommonAdapter<RingOrders.ConsumptionsBean>(getContext(), datas, R.layout.item_refun) {
             @Override
             public void convert(ViewHolder h, final RingOrders.ConsumptionsBean i) {
-                h.setText(R.id.tv_amount, i.getConsumptionAmount() / 100d + " H");
+                h.setText(R.id.tv_amount, i.getConsumptionAmount() / 100d + " ¥");
                 h.setText(R.id.tv_id, "订单号:" + i.getConsumptionId().substring(0, 10));
 //                h.setText(R.id.tv_time, i.getConsumptionTime());
                 h.setText(R.id.tv_time, DateUtil.milliString2String(i.getConsumptionTime(),DateUtil.MINUTE_PATTERN));

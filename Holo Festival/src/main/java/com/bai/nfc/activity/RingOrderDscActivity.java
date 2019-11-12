@@ -74,7 +74,7 @@ public class RingOrderDscActivity extends BaseActivity {
                 TextView price = h.getView(R.id.tv_price);
                 price.setTextSize(17f);
 
-                price.setText("卖出: " + i.getQuantity() + "\n已退: " + refCount + "\n价格: " + i.getPrice() / 100d + " H");
+                price.setText("卖出: " + i.getQuantity() + "\n已退: " + refCount + "\n价格: " + i.getPrice() / 100d + " ¥");
                 if (type != null && type.equals("dsc")) {
                     h.setVisibility(R.id.tv_count, View.GONE);
                     h.setVisibility(R.id.tv_add, View.GONE);
@@ -86,7 +86,7 @@ public class RingOrderDscActivity extends BaseActivity {
                             if (i.getSelectCount() < maxCanRef) {
                                 datas.get(h.getmPosition()).setSelectCount(i.getSelectCount() + 1);
                                 amount += i.getPrice();
-                                tvAmount.setText("总退款:" + amount / 100d + " H");
+                                tvAmount.setText("总退款:" + amount / 100d + " ¥");
                                 adapter.notifyDataSetChanged();
                             } else
                                 Toast.makeText(RingOrderDscActivity.this, "剩余可退数量:" + maxCanRef, Toast.LENGTH_SHORT).show();
@@ -98,7 +98,7 @@ public class RingOrderDscActivity extends BaseActivity {
                             if (i.getSelectCount() != 0) {
                                 datas.get(h.getmPosition()).setSelectCount(i.getSelectCount() - 1);
                                 amount -= i.getPrice();
-                                tvAmount.setText("总退款:" + amount / 100d + " H");
+                                tvAmount.setText("总退款:" + amount / 100d + " ¥");
                                 adapter.notifyDataSetChanged();
                             }
                         }

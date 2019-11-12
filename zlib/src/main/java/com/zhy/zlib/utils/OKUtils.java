@@ -127,9 +127,9 @@ public class OKUtils<T> {
                                     LogUtils.e("=onSuccess=" + Tag, str);
                                     listener.onSuccess(Tag, str);
                                     // 请求失败
-                                } else if (str.contains("code")){
-                                    LogUtils.e("=onException=" + Tag, str);
-                                    listener.onException(Tag, str);
+                                } else if (str.contains("code")&&
+                                        object.optString("code").equals("400")){
+                                    listener.onSuccess(Tag, str);
                                 }else {
                                     listener.onException(Tag,str);
                                 }

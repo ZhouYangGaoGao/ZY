@@ -41,7 +41,7 @@ public class PayActivity extends ExtentScreenBaseActivity {
     public void initView() {
         super.initView();
         amount = Hawk.get("selecetAmount");
-        tvAmount.setText("总价: " + amount / 100d + " H");
+        tvAmount.setText("总价: " + amount / 100d + " ¥");
         List<GoodsList.PageInfoBean.ListBean> temp = Hawk.get("selecetGoods");
         if (temp != null && temp.size() > 0)
             datas.addAll(temp);
@@ -52,9 +52,9 @@ public class PayActivity extends ExtentScreenBaseActivity {
                 h.setText(R.id.tv_count, i.getSelectCount() + "个");
 
                 if (i.getGoodsPrice() != -1)
-                    h.setText(R.id.tv_price, "单价:" + i.getGoodsPrice() / 100d + " H    共 " + i.getSelectCount() * i.getGoodsPrice() / 100d + " H");
+                    h.setText(R.id.tv_price, "单价:" + i.getGoodsPrice() / 100d + " ¥    共 " + i.getSelectCount() * i.getGoodsPrice() / 100d + " ¥");
                 else if (i.getCustomizationPrice() > 0)
-                    h.setText(R.id.tv_price, "单价:" + i.getCustomizationPrice() / 100d + " H    共 " + i.getSelectCount() * i.getCustomizationPrice() / 100d + " H");
+                    h.setText(R.id.tv_price, "单价:" + i.getCustomizationPrice() / 100d + " ¥    共 " + i.getSelectCount() * i.getCustomizationPrice() / 100d + " ¥");
             }
         });
     }
@@ -74,7 +74,7 @@ public class PayActivity extends ExtentScreenBaseActivity {
                     y += 33;
                     mIzkcService.showString(listBean.getGoodsName() +
                                     "   单价:" + (listBean.getGoodsPrice() == -1 ? listBean.getCustomizationPrice() / 100d : listBean.getGoodsPrice() / 100d) +
-                                    " H    数量:" + listBean.getSelectCount(),
+                                    " ¥    数量:" + listBean.getSelectCount(),
                             0, y, 480, 30, 30, TextStyle.GUI_COLOR_WHITE, TextStyle.GUI_ALIGN_CENTER);
                 }
                 mIzkcService.showString(tvAmount.getText().toString() + "出示付款码或扫描二维码付款",

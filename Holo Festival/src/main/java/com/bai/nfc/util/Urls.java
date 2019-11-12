@@ -14,4 +14,5 @@ public class Urls {
     public final static String refundHoloCoin = IP + "refundHoloCoin.do";//给客户退Holo币
     public final static String getDetailed = IP + "getDetailed.do";//收支明细
     public final static String getTecharge = IP + "getTecharge.do";//获取订单是否支付成功
+    public final static String getPayMent = "https://www.holofest.cn:8445/getPayMent.do";//扫客户微信获取订单是否支付成功
 }

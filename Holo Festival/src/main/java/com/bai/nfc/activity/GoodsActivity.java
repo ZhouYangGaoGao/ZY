@@ -54,7 +54,7 @@ public class GoodsActivity extends BaseActivity {
             @Override
             public void onChange(Object arg) {
                 double price = (double) arg;
-                tvAmount.setText("总价: " + price / 100 + " H");
+                tvAmount.setText("总价: " + price / 100 + " ¥");
             }
         });
 

@@ -41,7 +41,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="总退款: 0 H"
+            android:text="总退款: 0 ¥"
             android:textColor="@color/colorWhite"
             android:textSize="20sp" />
 

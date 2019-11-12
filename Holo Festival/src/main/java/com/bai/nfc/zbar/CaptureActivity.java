@@ -29,6 +29,7 @@ import com.bai.nfc.R;
 import com.bai.nfc.zbar.camera.CameraManager;
 import com.bai.nfc.zbar.decode.MainHandler;
 import com.bai.nfc.zbar.utils.BeepManager;
+import com.zhy.zlib.utils.LogUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -285,6 +286,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
             bundle.putInt("height", mCropRect.height());
             bundle.putString(EXTRA_STRING, result);
             intent.putExtras(bundle);
+            LogUtils.e(result);
             setResult(RESULT_OK,intent);
             CaptureActivity.this.finish();
         }

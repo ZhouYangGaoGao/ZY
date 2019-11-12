@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.bai.nfc.util.RequestUtil;
 import com.bai.nfc.util.Urls;
 import com.bai.nfc.zbar.CaptureActivity;
 import com.orhanobut.hawk.Hawk;
+import com.zhy.zlib.listener.CommonListener;
 import com.zhy.zlib.listener.TopListener;
 import com.zhy.zlib.view.TopBar;
 
@@ -49,6 +51,8 @@ public class CodeActivity extends ExtentScreenBaseActivity {
     TopBar topBar;
     private static final int REQUEST_CODE_SCAN = 0x0000;// 扫描二维码
     private int payWay = 1;
+    private int payType = 4;
+    private boolean isGetPayMent = false;
 
     @Override
     public View contentView(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class CodeActivity extends ExtentScreenBaseActivity {
         payWay = intentInt("payWay");
         //获取二维码
         List<GoodsList.PageInfoBean.ListBean> temp = Hawk.get("selecetGoods");
-        RequestUtil.consumHoloConin(getIP(), 4, payWay, null, temp, CodeActivity.this);
+        RequestUtil.consumHoloConin(getIP(), payType = 4, payWay, null, temp, CodeActivity.this);
     }
 
     @Override
@@ -76,8 +80,7 @@ public class CodeActivity extends ExtentScreenBaseActivity {
                         mCode.setImageBitmap(qrImage);
                         if (mIzkcService != null)
                             try {
-//                                mIzkcService.showGrayImage(qrImage,110,5,260,260,0,1);
-                                mIzkcService.showQrCode(code.getResult().getData(),260,110,5);
+                                mIzkcService.showQrCode(code.getResult().getData(), 260, 110, 5);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -92,16 +95,21 @@ public class CodeActivity extends ExtentScreenBaseActivity {
                                     @Override
                                     public void run() {
                                         RequestUtil.getTecharge(code.getOutTradeNo(), CodeActivity.this);
+                                        if (isGetPayMent && !TextUtils.isEmpty(no)) {
+                                            getPayment();
+                                        }
                                     }
                                 });
                             }
                         };
                         timer.schedule(timerTask, 5000, 5000);
                     } else if (code.getResult().getCode() == 400) {
-                        topBar.mRightText.setText("支付成功");
-                        showToast("支付成功");
-                        GoodsFragment.needRefresh = true;
-                        finish();
+                        if (!isGetPayMent) {
+                            topBar.mRightText.setText("支付成功");
+                            showToast("支付成功");
+                            GoodsFragment.needRefresh = true;
+                            finish();
+                        }
                     } else {
                         showToast(code.getResult().getMessage());
                     }
@@ -115,7 +123,22 @@ public class CodeActivity extends ExtentScreenBaseActivity {
                     finish();
                 }
                 break;
+            case Urls.getPayMent:
+                log("getPayMent",value);
+                JSONObject obj = JSONObject.parseObject(value);
+                if ("SUCCESS".equals(obj.getString("data"))){
+                    showToast("支付成功");
+                    GoodsFragment.needRefresh = true;
+                    finish();
+                }
+                break;
         }
+    }
+
+    private String no;
+
+    private void getPayment() {
+        RequestUtil.getPayMent(no, CodeActivity.this);
     }
 
     @Override
@@ -159,8 +182,66 @@ public class CodeActivity extends ExtentScreenBaseActivity {
                         Bundle bundle = data.getExtras();
                         String result = bundle.getString(CaptureActivity.EXTRA_STRING);
                         List<GoodsList.PageInfoBean.ListBean> temp = Hawk.get("selecetGoods");
-                        RequestUtil.consumHoloConin(getIP(), 5, payWay, result, temp, this);
-                        scan.setText("扫描结果：" + result);
+                        isGetPayMent = (payWay == 1);
+                        RequestUtil.consumHoloConin(getIP(), payType = 5, payWay, result, temp, isGetPayMent ? new CommonListener() {
+                            @Override
+                            public void onSuccess(String Tag, String value) {
+                                final Code code = JSON.parseObject(value, Code.class);
+                                no = code.getOutTradeNo();
+                            }
+
+                            @Override
+                            public void onException(String Tag, String value) {
+
+                            }
+
+                            @Override
+                            public void onFailure(String Tag, String value) {
+
+                            }
+
+                            @Override
+                            public void onFinish(String Tag, String value) {
+
+                            }
+
+                            @Override
+                            public View contentView(Bundle savedInstanceState) {
+                                return null;
+                            }
+
+                            @Override
+                            public void initView() {
+
+                            }
+
+                            @Override
+                            public void showToast(String message) {
+
+                            }
+
+                            @Override
+                            public void log(String Tag, String value) {
+
+                            }
+
+                            @Override
+                            public View getView(int id) {
+                                return null;
+                            }
+
+                            @Override
+                            public void showLoading() {
+
+                            }
+
+                            @Override
+                            public void disLoading() {
+
+                            }
+                        } : this);
+                        scan.setText("扫描成功");
+
                     }
                 }
                 break;
@@ -205,7 +286,6 @@ public class CodeActivity extends ExtentScreenBaseActivity {
 
     private Timer timer;
     private TimerTask timerTask;
-    private int retime = 0;
 
     public void cancelTimer() {
         if (timerTask != null) {
